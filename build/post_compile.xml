@@ -6,7 +6,7 @@
 	<property name="DEPLOY_DIR" value="bin"/>
 	
 	<!-- Grab application name from launcher output -->
-	<loadfile property="APP_NAME" srcFile="launch/output.txt">
+	<loadfile property="APP_NAME" srcFile="${basedir}/launch/output.txt">
 		<filterchain>
 			<linecontains>
 				<contains value=".swf"/>
@@ -19,7 +19,7 @@
 	</loadfile>
 	
 	<!-- Inspect application as file for SWF properties -->
-	<loadproperties srcFile="${APP_ROOT}/${APP_NAME}.as">
+	<loadproperties srcFile="${basedir}/${APP_ROOT}/${APP_NAME}.as">
 		<filterchain>
 			<linecontainsregexp>
 			  <regexp pattern=".*\[SWF\((.*)\)\].*"/>
@@ -76,7 +76,7 @@
     	
         <property name="wrapper.html" value="${DEPLOY_DIR}/${APP_NAME}.html"/>
     	
-        <copy overwrite="true" file="html-template/index.template.html" tofile="${wrapper.html}" />
+        <copy overwrite="true" file="html-template/index.template.html" tofile="${wrapper.html}" preservelastmodified="true"/>
     	
         <replace file="${wrapper.html}" token="$${title}" value="${APP_NAME}"/>
     	<replace file="${wrapper.html}" token="$${application}" value="${APP_NAME}"/>
@@ -91,7 +91,8 @@
 	
 	<!-- copy assets from source folder to deploy folder -->
 	<target name="copyassetfiles">
-		<copy overwrite="true" todir="${DEPLOY_DIR}">
+		<echo>Copying Assets...</echo>
+		<copy overwrite="true" todir="${DEPLOY_DIR}" preservelastmodified="true">
 	        <fileset dir="${APP_ROOT}">
 	            <exclude name="**/*.as"/>
 	        	<exclude name="**/*.pbk"/>
@@ -99,7 +100,7 @@
 	            <exclude name="**/.svn/**" />
 	        </fileset>
 	    </copy>
-		<copy overwrite="true" todir="${DEPLOY_DIR}">
+		<copy overwrite="true" todir="${DEPLOY_DIR}" preservelastmodified="true">
             <fileset dir="html-template">
             	<exclude name="**/*.html" />
                 <exclude name="**/.svn/**" />
