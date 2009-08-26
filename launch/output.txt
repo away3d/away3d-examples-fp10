@@ -1,9 +1,0 @@
-Execute command: compile 1
-
-----------
-Loading configuration file /Applications/FDT3/plugins/com.powerflasher.fdt.shippedflex_3.2.0.3958_0001/flex/frameworks/flex-config.xml
-Nothing has changed since the last compile. Skip...
-/Users/robbateman/Documents/fdtworkspace/Away3D_Examples/bin/Basic_Swf.swf (237788 bytes)
-(fcsh) 
-----------
-Launch Browser
