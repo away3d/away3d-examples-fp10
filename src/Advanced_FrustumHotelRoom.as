@@ -208,7 +208,7 @@ package
 		{
 			//loader = Max3DS.load("assets/room/interior.3ds", {loadersize:40, centerMeshes:true}) as LoaderCube;
 			loader = new LoaderCube();
-			loader.loadersize = 40;
+			loader.loaderSize = 40;
 			max3ds = new Max3DS();
 			max3ds.centerMeshes = true;
 			loader.loadGeometry("assets/room/interior.3ds", max3ds);

@@ -219,7 +219,7 @@ package
 			//create ferrari model
 			//model = Max3DS.parse(F360, {material:materialArray[materialIndex], ownCanvas:true, centerMeshes:true, pushfront:true, blendMode:BlendMode.HARDLIGHT, rotationX:90, y:-200});
 			max3ds = new Max3DS();
-			model = max3ds.parse(F360) as ObjectContainer3D;
+			model = max3ds.parseGeometry(F360) as ObjectContainer3D;
 			model.materialLibrary.getMaterial("fskin").material = materialArray[materialIndex];
 			model.ownCanvas = true;
 			model.centerMeshes();

@@ -254,7 +254,7 @@ package
 		{
             //torso = Md2still.parse(TorsoMD2, {ownCanvas:true, material:torsoNormalMaterial});
             Md2Torso = new Md2still();
-            torso = Md2Torso.parse(TorsoMD2) as Mesh;
+            torso = Md2Torso.parseGeometry(TorsoMD2) as Mesh;
             torso.ownCanvas = true;
             torso.material = torsoNormalMaterial;
             
@@ -267,7 +267,7 @@ package
 			
 			//pedestal = Md2still.parse(PedestalMD2, {ownCanvas:true, material:pedestalMaterial, rotationX:180, rotationZ:180});
 			Md2Pedestal = new Md2still();
-			pedestal = Md2Pedestal.parse(PedestalMD2) as Mesh;
+			pedestal = Md2Pedestal.parseGeometry(PedestalMD2) as Mesh;
 			pedestal.ownCanvas = true;
 			pedestal.material = pedestalMaterial;
             pedestal.rotationX = 180;

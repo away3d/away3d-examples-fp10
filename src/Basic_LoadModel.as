@@ -164,7 +164,7 @@ package
 			max3ds.centerMeshes = true;
 			max3ds.material = materialArray[materialIndex];
 			loader = new LoaderCube();
-			loader.loadersize = 200;
+			loader.loaderSize = 200;
 			loader.addOnSuccess(onSuccess);
 			loader.loadGeometry("assets/f360.3ds", max3ds);
 			

@@ -175,7 +175,7 @@ package
 		{
 			//model = Md2.parse(OgreMesh, {material:material}) as Mesh;
 			md2 = new Md2();
-			model = md2.parse(OgreMesh) as Mesh;
+			model = md2.parseGeometry(OgreMesh) as Mesh;
 			model.material = material;
 			
 			model.scale(0.05);
