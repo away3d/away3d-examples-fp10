@@ -1,5 +1,6 @@
 package
 {
+	import away3d.debug.AwayStats;
 	import away3d.containers.View3D;
 	import away3d.core.base.Mesh;
 	import away3d.core.math.Number3D;
@@ -11,8 +12,6 @@ package
 	
 	import flash.display.Sprite;
 	import flash.events.Event;
-	
-	import net.hires.debug.Stats;
 	
 	
 	[SWF(width="800", height="600", frameRate="60", backgroundColor="0x000000")]
@@ -74,7 +73,7 @@ package
 			_light2.radius = 300;
 			_light2.fallOff = 320;
 			
-			addChild(new Stats());
+			addChild(new AwayStats(_view));
 			addEventListener(Event.ENTER_FRAME, onEnterFrame);
 		}
 		

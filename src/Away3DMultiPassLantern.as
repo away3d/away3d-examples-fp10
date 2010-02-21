@@ -39,6 +39,7 @@ THE SOFTWARE.
 
 package
 {
+	import away3d.debug.AwayStats;
 	import AS3s.Lantern;
 	
 	import away3d.containers.View3D;
@@ -61,8 +62,6 @@ package
 	import flash.display.StageQuality;
 	import flash.events.Event;
 	import flash.events.MouseEvent;
-	
-	import net.hires.debug.Stats;
 	
 	[SWF(width="800", height="600", frameRate="30", backgroundColor="0x000000")]
 	public class Away3DMultiPassLantern extends Sprite
@@ -145,7 +144,7 @@ package
 			addEventListener(Event.ENTER_FRAME, onEnterFrame);
 			stage.addEventListener(MouseEvent.CLICK, onClick);
 			
-			addChild(new Stats());
+			addChild(new AwayStats(_view));
 		}
 		
 		private function onClick(event : MouseEvent) : void
