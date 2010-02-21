@@ -37,10 +37,15 @@
 	
 	<!-- Ensure deploy directory exists -->
 	<available file="${DEPLOY_DIR}" type="dir" property="deploy.present"/>
-	
-	<property name="APP_WIDTH" value="${width}"/>
-	<property name="APP_HEIGHT" value="${height}"/>
-	<property name="APP_BGCOLOR" value="${backgroundColor}"/>
+	<condition property="APP_WIDTH" value="${width}" else="100%">
+		<isset property="width" />
+	</condition>
+	<condition property="APP_HEIGHT" value="${height}" else="100%">
+		<isset property="height" />
+	</condition>
+	<condition property="APP_BGCOLOR" value="${backgroundColor}" else="#FFFFFF">
+		<isset property="backgroundColor" />
+	</condition>
 	<property name="APP_VERSION_MAJOR" value="10"/>
 	<property name="APP_VERSION_MINOR" value="0"/>
 	<property name="APP_VERSION_REVISION" value="0"/>
@@ -73,7 +78,6 @@
 	<!-- create html wrapper from html-template contents -->
     <target name="wrapper">
         <echo>Creating Wrapper...</echo>
-    	
         <property name="wrapper.html" value="${DEPLOY_DIR}/${APP_NAME}.html"/>
     	
         <copy overwrite="true" file="html-template/index.template.html" tofile="${wrapper.html}" preservelastmodified="true"/>

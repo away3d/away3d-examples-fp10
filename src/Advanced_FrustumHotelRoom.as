@@ -286,6 +286,7 @@ package
 						(mesh.faces[52] as Face).material = tvMaterial;
 						(mesh.faces[53] as Face).material = tvMaterial;
 					}
+					//child.debugbs = true;
 					child.ownCanvas = true;
 					child.renderer = Renderer.CORRECT_Z_ORDER as IPrimitiveConsumer
 					sortedObjects.push(child);

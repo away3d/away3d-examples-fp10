@@ -188,7 +188,7 @@ package {
 			view = new View3D();
 			view.scene = scene;
 			view.camera = camera;
-			view.session = new BitmapRenderSession(1);
+			//view.session = new BitmapRenderSession(1);
 			
 			view.addSourceURL("srcview/index.html");
 			addChild(view);
@@ -409,8 +409,8 @@ package {
 			
 			bloomBitmap.visible = bloom;
 			
-			if (bloom)
-				bloomBitmap.bitmapData = view.getBitmapData().clone();
+			//if (bloom)
+			//	bloomBitmap.bitmapData = view.getBitmapData().clone();
 		}
 		
 		/**

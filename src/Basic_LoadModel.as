@@ -36,8 +36,8 @@ THE SOFTWARE.
 
 */
 
-package
-{
+package {
+	import away3d.core.math.MatrixAway3D;
 	import away3d.cameras.*;
 	import away3d.containers.*;
 	import away3d.core.base.*;
@@ -162,11 +162,11 @@ package
 			//loader = Max3DS.load("assets/f360.3ds", {loadersize:200, centerMeshes:true, material:materialArray[materialIndex]}) as LoaderCube;
 			max3ds = new Max3DS();
 			max3ds.centerMeshes = true;
-			max3ds.material = materialArray[materialIndex];
+			//max3ds.material = materialArray[materialIndex];
 			loader = new LoaderCube();
 			loader.loaderSize = 200;
 			loader.addOnSuccess(onSuccess);
-			loader.loadGeometry("assets/f360.3ds", max3ds);
+			loader.loadGeometry("assets/turtlefull.obj", new Obj({useGroups:true}));
 			
 			scene.addChild(loader);
 		}
@@ -196,14 +196,15 @@ package
 			}
 			
 			//rotate the wheels
+			/*
 			if (model) {
 				for each (var object:Object3D in model.children) {
-					//object.debugbb = true;
-					if (object.name.indexOf("wheel") != -1)
-						object.rotationX += 10;
+					object.debugbb = true;
+					//if (object.name.indexOf("wheel") != -1)
+					//	object.rotationX += 10;
 				}
 			}
-			
+			*/
 			camera.hover();
 			view.render();
 		}
@@ -214,7 +215,7 @@ package
 		private function onSuccess(event:Event):void
 		{
 			model = loader.handle as ObjectContainer3D;
-			model.scale(100);
+			model.scale(0.1);
 			
 			model.rotationX = 90;
 			

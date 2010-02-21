@@ -1,13 +1,12 @@
 /*
 
-Object interaction example in Away3d using the mouse
+Phong material example in Away3d using PhongBitmapMaterial
 
 Demonstrates:
 
-How to use the MouseEvent3D listeners.
-How to use the fog filter to provide depth shading on a mesh.
+How to use the PhongBitmapMaterial with multiple lights.
 
-Code by Rob Bateman & Alexander Zadorozhny
+Code by Rob Bateman
 rob@infiniteturtles.co.uk
 http://www.infiniteturtles.co.uk
 
@@ -37,36 +36,61 @@ THE SOFTWARE.
 
 package
 {
+	import away3d.debug.AwayStats;
 	import away3d.cameras.*;
 	import away3d.containers.*;
-	import away3d.core.base.*;
-	import away3d.core.filter.*;
-	import away3d.core.render.*;
-	import away3d.events.*;
+	import away3d.core.utils.Cast;
+	import away3d.lights.*;
+	import away3d.loaders.*;
 	import away3d.materials.*;
 	import away3d.primitives.*;
 	
 	import flash.display.*;
 	import flash.events.*;
+	import flash.utils.*;
 	
 	[SWF(backgroundColor="#000000", frameRate="60", quality="LOW", width="800", height="600")]
 	
-	public class Basic_InteractiveObjects extends Sprite
+	public class Basic_BitmapPhong extends Sprite
 	{
 		//signature swf
     	[Embed(source="assets/signature.swf", symbol="Signature")]
     	private var SignatureSwf:Class;
     	
-		//engine variables
+		//cube texture jpg
+		[Embed(source="assets/blue.jpg")]
+    	public static var BlueImage:Class;
+    	
+    	//sphere texture jpg
+		[Embed(source="assets/green.jpg")]
+    	public static var GreenImage:Class;
+    	
+    	//torus texture jpg
+    	[Embed(source="assets/red.jpg")]
+    	public static var RedImage:Class;
+    	
+    	//plane texture jpg
+    	[Embed(source="assets/yellow.jpg")]
+    	public static var YellowImage:Class;
+    	
+    	//engine variables
     	private var scene:Scene3D;
 		private var camera:HoverCamera3D;
-		private var fogfilter:FogFilter;
-		private var renderer:BasicRenderer;
 		private var view:View3D;
 		
 		//signature variables
 		private var Signature:Sprite;
 		private var SignatureBitmap:Bitmap;
+		
+		//material objects
+		private var planeMaterial:BitmapMaterial;
+		private var sphereMaterial:PhongBitmapMaterialCache;
+		private var cubeMaterial:PhongBitmapMaterialCache;
+		private var torusMaterial:PhongBitmapMaterialCache;
+		
+		//light objects
+		private var light1:DirectionalLight3D;
+		private var light2:DirectionalLight3D;
 		
 		//scene objects
 		private var plane:Plane;
@@ -81,22 +105,32 @@ package
 		private var lastMouseX:Number;
 		private var lastMouseY:Number;
 		
-		public function Basic_InteractiveObjects()
+		/**
+		 * Constructor
+		 */
+		public function Basic_BitmapPhong()
 		{
 			init();
 		}
 		
+		/**
+		 * Global initialise function
+		 */
 		private function init():void
 		{
 			initEngine();
+			initMaterials();
+			initLights();
 			initObjects();
 			initListeners();
 		}
 		
+		/**
+		 * Initialise the engine
+		 */
 		private function initEngine():void
 		{
 			scene = new Scene3D();
-			
 			//camera = new HoverCamera3D({focus:50, distance:1000, mintiltangle:0, maxtiltangle:90});
 			camera = new HoverCamera3D();
 			camera.focus = 50;
@@ -107,19 +141,10 @@ package
 			camera.targetpanangle = camera.panangle = 45;
 			camera.targettiltangle = camera.tiltangle = 20;
 			
-			//fogfilter = new FogFilter({material:new ColorMaterial(0x000000), minZ:500, maxZ:2000});
-			fogfilter = new FogFilter();
-			fogfilter.material = new ColorMaterial(0x000000);
-			fogfilter.minZ = 500;
-			fogfilter.maxZ = 2000;
-			
-			renderer = new BasicRenderer(fogfilter);
-			
-			//view = new View3D({scene:scene, camera:camera, renderer:renderer});
+			//view = new View3D({scene:scene, camera:camera});
 			view = new View3D();
 			view.scene = scene;
 			view.camera = camera;
-			view.renderer = renderer;
 			
 			view.addSourceURL("srcview/index.html");
 			addChild(view);
@@ -131,23 +156,70 @@ package
             SignatureBitmap.bitmapData.draw(Signature);
             stage.quality = StageQuality.LOW;
             addChild(SignatureBitmap);
+            addChild(new AwayStats());
 		}
 		
+		/**
+		 * Initialise the materials
+		 */
+		private function initMaterials():void
+		{
+			//planeMaterial = new BitmapMaterial(Cast.bitmap(YellowImage), {precision:2.5});
+			planeMaterial = new BitmapMaterial(Cast.bitmap(YellowImage));
+			planeMaterial.precision = 2.5;
+			
+			//sphereMaterial = new PhongBitmapMaterial(Cast.bitmap(GreenImage), {shininess:20, specular:0.4});
+			sphereMaterial = new PhongBitmapMaterialCache(Cast.bitmap(GreenImage));
+			sphereMaterial.shininess = 20;
+			sphereMaterial.specular = 0.4;
+			
+			cubeMaterial = new PhongBitmapMaterialCache(Cast.bitmap(BlueImage));
+			
+			torusMaterial = new PhongBitmapMaterialCache(Cast.bitmap(RedImage));
+		}
+		
+		/**
+		 * Initialise the lights
+		 */
+		private function initLights():void
+		{
+			//light1 = new DirectionalLight3D({y:1, ambient:0.1, diffuse:0.7});
+			light1 = new DirectionalLight3D();
+			light1.y = 1;
+			light1.ambient = 0.1;
+			light1.diffuse = 0.7;
+			
+			scene.addChild(light1);
+			
+			//light2 = new DirectionalLight3D({y:1, color:0x00FFFF, ambient:0.1, diffuse:0.7});
+			light2 = new DirectionalLight3D();
+			light2.y = 1;
+			light2.color = 0x00FFFF;
+			light2.ambient = 0.1;
+			light2.diffuse = 0.7;
+			
+			scene.addChild(light2);
+		}
+		
+		/**
+		 * Initialise the scene objects
+		 */
 		private function initObjects():void
 		{
-			//plane = new Plane({y:-20, width:1000, height:1000, pushback:true, segmentsW:20, segmentsH:20});
+			//plane = new Plane({material:planeMaterial, y:-20, width:1000, height:1000, pushback:true});
 			plane = new Plane();
+			plane.material = planeMaterial;
 			plane.y = -20;
 			plane.width = 1000;
 			plane.height = 1000;
 			plane.pushback = true;
-			plane.segmentsW = 20;
-			plane.segmentsH = 20;
 			
 			scene.addChild(plane);
 			
-	        //sphere = new Sphere({x:300, y:160, z:300, radius:150, segmentsW:12, segmentsH:10});
+	        //sphere = new Sphere({ownCanvas:true, material:sphereMaterial, x:300, y:160, z:300, radius:150, segmentsW:12, segmentsH:10});
 	        sphere = new Sphere();
+	        sphere.ownCanvas = true;
+	        sphere.material = sphereMaterial;
 	        sphere.x = 300;
 	        sphere.y = 160;
 	        sphere.z = 300;
@@ -157,8 +229,10 @@ package
 	        
 			scene.addChild(sphere);
 			
-	        //cube = new Cube({x:300, y:160, z:-80, width:200, height:200, depth:200});
+	        //cube = new Cube({ownCanvas:true, material:cubeMaterial, x:300, y:160, z:-80, width:200, height:200, depth:200});
 	        cube = new Cube();
+	        cube.ownCanvas = true;
+	        cube.material = cubeMaterial;
 	        cube.x = 300;
 	        cube.y = 160;
 	        cube.z = -80;
@@ -168,8 +242,10 @@ package
 	        
 			scene.addChild(cube);
 			
-	        //torus = new Torus({x:-250, y:160, z:-250, radius:150, tube:60, segmentsR:12, segmentsT:10});
+	        //torus = new Torus({ownCanvas:true, material:torusMaterial, x:-250, y:160, z:-250, radius:150, tube:60, segmentsR:12, segmentsT:10});
 	        torus = new Torus();
+	        torus.ownCanvas = true;
+	        torus.material = torusMaterial;
 	        torus.x = -250;
 	        torus.y = 160;
 	        torus.z = -250;
@@ -179,7 +255,6 @@ package
 	        torus.segmentsT = 10;
 	        
 			scene.addChild(torus);
-			
 		}
 		
 		/**
@@ -187,9 +262,6 @@ package
 		 */
 		private function initListeners():void
 		{
-			//scene.addOnMouseUp(onSceneMouseUp);
-			scene.addEventListener(MouseEvent3D.MOUSE_UP, onSceneMouseUp);
-			
 			addEventListener(Event.ENTER_FRAME, onEnterFrame);
 			stage.addEventListener(MouseEvent.MOUSE_DOWN, onMouseDown);
 			stage.addEventListener(MouseEvent.MOUSE_UP, onMouseUp);
@@ -198,22 +270,12 @@ package
 		}
 		
 		/**
-		 * Mouse up listener for the 3d scene
-		 */
-	    private function onSceneMouseUp(e:MouseEvent3D):void
-	    {
-	        if (e.object is Mesh) {
-	        	trace(e.material)
-	            var mesh:Mesh = e.object as Mesh;
-	            mesh.material = new WireColorMaterial();
-	        }
-	    }
-		
-		/**
 		 * Navigation and render loop
 		 */
 		private function onEnterFrame(event:Event):void
 		{
+			tick(getTimer());
+			
 			if (move) {
 				camera.targetpanangle = 0.3*(stage.mouseX - lastMouseX) + lastPanAngle;
 				camera.targettiltangle = 0.3*(stage.mouseY - lastMouseY) + lastTiltAngle;
@@ -263,5 +325,16 @@ package
             view.y = stage.stageHeight / 2;
             SignatureBitmap.y = stage.stageHeight - Signature.height;
 		}
+	    
+	    /**
+	    * Updates every frame
+	    */
+        private function tick(time:int):void
+	    {
+	        cube.rotationY += 2;
+	        
+	    	light1.x = Math.cos(time/2000);
+	    	light1.z = Math.sin(time/2000);
+	    }
 	}
 }
