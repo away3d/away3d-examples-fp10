@@ -112,6 +112,8 @@ package
 		private var mesh:Mesh;
 		private var lastPanAngle:Number;
 		private var lastTiltAngle:Number;
+		private var panAngle:Number;
+		private var tiltAngle:Number;
 		private var lastMouseX:Number;
 		private var lastMouseY:Number;
 		
@@ -146,11 +148,12 @@ package
 			camera = new HoverCamera3D();
 			camera.distance = 1500;
 			camera.yfactor = 1;
-			camera.mintiltangle = -45;
+			camera.minTiltAngle = -45;
 			camera.steps = 4;
 			
-			camera.targetpanangle = 285;
-			camera.targettiltangle = 10;
+			camera.panAngle = 285;
+			camera.tiltAngle = 10;
+			camera.hover(true);
 			
 			//view = new View3D({scene:scene, camera:camera});
 			view = new View3D();
@@ -325,9 +328,9 @@ package
 			if (move) {
 				outlines.visible = true;
 				containers.visible = false;
-				camera.targetpanangle = 0.3*(stage.mouseX - lastMouseX) + lastPanAngle;
-				camera.targettiltangle = 0.3*(stage.mouseY - lastMouseY) + lastTiltAngle;
-			} else if (camera.targetpanangle == camera.panangle && camera.targettiltangle == camera.tiltangle) {
+				camera.panAngle = 0.3 * (stage.mouseX - lastMouseX) + lastPanAngle;
+				camera.tiltAngle = 0.3 * (stage.mouseY - lastMouseY) + lastTiltAngle;
+			} else if (camera.panAngle == panAngle && camera.tiltAngle == tiltAngle) {
 				outlines.visible = false;
 				containers.visible = true;
 				
@@ -335,6 +338,9 @@ package
 				for each (turtle in turtles)
 					turtle.alpha = 1/(1 + (view.camera.screen(turtle).z - 1100)/1000);
 			}
+			
+			panAngle = camera.panAngle;
+			tiltAngle = camera.tiltAngle;
 			
 			camera.hover();
 			view.render();
@@ -365,9 +371,9 @@ package
 		 */
 		private function onMouseDown(event:MouseEvent):void
         {
-            lastPanAngle = camera.targetpanangle;
-            lastTiltAngle = camera.targettiltangle;
-            lastMouseX = stage.mouseX;
+            lastPanAngle = camera.panAngle;
+			lastTiltAngle = camera.tiltAngle;
+			lastMouseX = stage.mouseX;
             lastMouseY = stage.mouseY;
         	move = true;
         	stage.addEventListener(Event.MOUSE_LEAVE, onStageMouseLeave);

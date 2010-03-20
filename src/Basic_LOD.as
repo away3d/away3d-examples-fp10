@@ -39,14 +39,11 @@ package
 	import away3d.cameras.*;
 	import away3d.containers.*;
 	import away3d.core.utils.*;
-	import away3d.lights.*;
-	import away3d.loaders.*;
 	import away3d.materials.*;
 	import away3d.primitives.*;
 	
 	import flash.display.*;
 	import flash.events.*;
-	import flash.utils.*;
 	
 	[SWF(backgroundColor="#000000", frameRate="30", quality="LOW", width="800", height="600")]
 	
@@ -116,11 +113,12 @@ package
 			camera = new HoverCamera3D();
 			camera.focus = 50;
 			camera.distance = 1000;
-			camera.mintiltangle = 10;
-			camera.maxtiltangle = 90;
+			camera.minTiltAngle = 10;
+			camera.maxTiltAngle = 90;
 			
-			camera.targetpanangle = camera.panangle = -90;
-			camera.targettiltangle = camera.tiltangle = 20;
+			camera.panAngle = -90;
+			camera.tiltAngle = 20;
+			camera.hover(true);
 			
 			//view = new View3D({scene:scene, camera:camera});
 			view = new View3D();
@@ -214,8 +212,8 @@ package
 		private function onEnterFrame(event:Event):void
 		{
 			if (move) {
-				camera.targetpanangle = 0.3*(stage.mouseX - lastMouseX) + lastPanAngle;
-				camera.targettiltangle = 0.3*(stage.mouseY - lastMouseY) + lastTiltAngle;
+				camera.panAngle = 0.3 * (stage.mouseX - lastMouseX) + lastPanAngle;
+				camera.tiltAngle = 0.3 * (stage.mouseY - lastMouseY) + lastTiltAngle;
 			}
 			
 			camera.hover();  
@@ -227,9 +225,9 @@ package
 		 */
 		private function onMouseDown(event:MouseEvent):void
         {
-            lastPanAngle = camera.targetpanangle;
-            lastTiltAngle = camera.targettiltangle;
-            lastMouseX = stage.mouseX;
+            lastPanAngle = camera.panAngle;
+			lastTiltAngle = camera.tiltAngle;
+			lastMouseX = stage.mouseX;
             lastMouseY = stage.mouseY;
         	move = true;
         	stage.addEventListener(Event.MOUSE_LEAVE, onStageMouseLeave);

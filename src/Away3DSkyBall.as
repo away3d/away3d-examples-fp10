@@ -61,11 +61,13 @@ package
 		private function initEngine():void
 		{
 			scene = new Scene3D();
+			
 			camera = new HoverCamera3D({zoom:10, focus:40});
-			camera.mintiltangle = -80;
-			camera.maxtiltangle = 20;
-			camera.targetpanangle = 90;
-			camera.targettiltangle = 0;
+			camera.minTiltAngle = -80;
+			camera.maxTiltAngle = 20;
+			camera.panAngle = 90;
+			camera.tiltAngle = 0;
+			
 			view = new View3D({scene:scene, camera:camera});
 			view.x = 400;
 			view.y = 300;
@@ -154,8 +156,8 @@ package
 		private function onEnterFrame(event:Event):void
 		{
 			if (move) {
-				camera.targetpanangle = 0.3*(stage.mouseX - lastMouseX) + lastPanAngle;
-				camera.targettiltangle = 0.3*(stage.mouseY - lastMouseY) + lastTiltAngle;
+				camera.panAngle = 0.3 * (stage.mouseX - lastMouseX) + lastPanAngle;
+				camera.tiltAngle = 0.3 * (stage.mouseY - lastMouseY) + lastTiltAngle;
 			}
 			
 			var i:int = projectionNum;
@@ -210,9 +212,9 @@ package
 		
 		private function onMouseDown(event:MouseEvent):void
         {
-            lastPanAngle = camera.targetpanangle;
-            lastTiltAngle = camera.targettiltangle;
-            lastMouseX = stage.mouseX;
+            lastPanAngle = camera.panAngle;
+			lastTiltAngle = camera.tiltAngle;
+			lastMouseX = stage.mouseX;
             lastMouseY = stage.mouseY;
         	move = true;
         	stage.addEventListener(Event.MOUSE_LEAVE, onStageMouseLeave);

@@ -181,8 +181,9 @@ package
 			camera.distance = 40000;
 			camera.yfactor = 1;
 			
-			camera.targetpanangle = camera.panangle = -10;
-			camera.targettiltangle = camera.tiltangle = 20;
+			camera.panAngle = -10;
+			camera.tiltAngle = 20;
+			camera.hover(true);
 			
 			//view = new View3D({scene:scene, camera:camera});
 			view = new View3D();
@@ -337,8 +338,8 @@ package
 		private function onEnterFrame(event:Event):void
 		{
 			if (move) {
-				camera.targetpanangle = 0.3*(stage.mouseX - lastMouseX) + lastPanAngle;
-				camera.targettiltangle = 0.3*(stage.mouseY - lastMouseY) + lastTiltAngle;
+				camera.panAngle = 0.3 * (stage.mouseX - lastMouseX) + lastPanAngle;
+				camera.tiltAngle = 0.3 * (stage.mouseY - lastMouseY) + lastTiltAngle;
 			}
 			
 			torso.rotationY += 3;
@@ -352,9 +353,9 @@ package
 		 */
 		private function onMouseDown(event:MouseEvent):void
         {
-            lastPanAngle = camera.targetpanangle;
-            lastTiltAngle = camera.targettiltangle;
-            lastMouseX = stage.mouseX;
+            lastPanAngle = camera.panAngle;
+			lastTiltAngle = camera.tiltAngle;
+			lastMouseX = stage.mouseX;
             lastMouseY = stage.mouseY;
         	move = true;
         	stage.addEventListener(Event.MOUSE_LEAVE, onStageMouseLeave);

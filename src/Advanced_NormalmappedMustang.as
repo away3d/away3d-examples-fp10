@@ -178,17 +178,18 @@ package {
 			camera.focus = 50;
 			camera.lens = new SphericalLens();
 			camera.distance = 600;
-			camera.maxtiltangle = 70;
-			camera.mintiltangle = 5;
+			camera.maxTiltAngle = 70;
+			camera.minTiltAngle = 5;
 			
-			camera.targetpanangle = camera.panangle = -140;
-			camera.targettiltangle = camera.tiltangle = 20;
+			camera.panAngle = -140;
+			camera.tiltAngle = 20;
+			camera.hover(true);
 			
 			//view = new View3D({scene:scene, camera:camera, session:new BitmapRenderSession(1)});
 			view = new View3D();
 			view.scene = scene;
 			view.camera = camera;
-			//view.session = new BitmapRenderSession(1);
+			view.session = new BitmapRenderSession(1);
 			
 			view.addSourceURL("srcview/index.html");
 			addChild(view);
@@ -400,8 +401,8 @@ package {
 			tick(getTimer());
 			
 			if (move) {
-				camera.targetpanangle = 0.3*(stage.mouseX - lastMouseX) + lastPanAngle;
-				camera.targettiltangle = 0.3*(stage.mouseY - lastMouseY) + lastTiltAngle;
+				camera.panAngle = 0.3*(stage.mouseX - lastMouseX) + lastPanAngle;
+				camera.tiltAngle = 0.3*(stage.mouseY - lastMouseY) + lastTiltAngle;
 			}
 			
 			camera.hover();  
@@ -409,8 +410,8 @@ package {
 			
 			bloomBitmap.visible = bloom;
 			
-			//if (bloom)
-			//	bloomBitmap.bitmapData = view.getBitmapData().clone();
+			if (bloom)
+				bloomBitmap.bitmapData = view.getBitmapData().clone();
 		}
 		
 		/**
@@ -418,8 +419,8 @@ package {
 		 */
 		private function onMouseDown(event:MouseEvent):void
         {
-            lastPanAngle = camera.targetpanangle;
-            lastTiltAngle = camera.targettiltangle;
+            lastPanAngle = camera.panAngle;
+            lastTiltAngle = camera.tiltAngle;
             lastMouseX = stage.mouseX;
             lastMouseY = stage.mouseY;
         	move = true;

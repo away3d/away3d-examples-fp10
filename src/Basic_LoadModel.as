@@ -36,15 +36,14 @@ THE SOFTWARE.
 
 */
 
-package {
-	import away3d.core.math.MatrixAway3D;
+package
+{
 	import away3d.cameras.*;
 	import away3d.containers.*;
 	import away3d.core.base.*;
 	import away3d.core.utils.*;
 	import away3d.events.*;
 	import away3d.loaders.*;
-	import away3d.materials.*;
 	
 	import flash.display.*;
 	import flash.events.*;
@@ -126,8 +125,9 @@ package {
 			scene = new Scene3D();
 			
 			camera = new HoverCamera3D();
-			camera.targetpanangle = camera.panangle = 45;
-			camera.targettiltangle = camera.tiltangle = 20;
+			camera.panAngle = 45;
+			camera.tiltAngle = 20;
+			camera.hover(true);
 			
 			//view = new View3D({scene:scene, camera:camera});
 			view = new View3D();
@@ -162,11 +162,12 @@ package {
 			//loader = Max3DS.load("assets/f360.3ds", {loadersize:200, centerMeshes:true, material:materialArray[materialIndex]}) as LoaderCube;
 			max3ds = new Max3DS();
 			max3ds.centerMeshes = true;
-			//max3ds.material = materialArray[materialIndex];
+			max3ds.material = materialArray[materialIndex];
+			
 			loader = new LoaderCube();
 			loader.loaderSize = 200;
 			loader.addOnSuccess(onSuccess);
-			loader.loadGeometry("assets/turtlefull.obj", new Obj({useGroups:true}));
+			loader.loadGeometry("assets/f360.3ds", max3ds);
 			
 			scene.addChild(loader);
 		}
@@ -191,20 +192,19 @@ package {
 			loader.handle.rotationY += 2;
 			
 			if (move) {
-				camera.targetpanangle = 0.3*(stage.mouseX - lastMouseX) + lastPanAngle;
-				camera.targettiltangle = 0.3*(stage.mouseY - lastMouseY) + lastTiltAngle;
+				camera.panAngle = 0.3 * (stage.mouseX - lastMouseX) + lastPanAngle;
+				camera.tiltAngle = 0.3 * (stage.mouseY - lastMouseY) + lastTiltAngle;
 			}
 			
 			//rotate the wheels
-			/*
 			if (model) {
 				for each (var object:Object3D in model.children) {
-					object.debugbb = true;
-					//if (object.name.indexOf("wheel") != -1)
-					//	object.rotationX += 10;
+					//object.debugbb = true;
+					if (object.name.indexOf("wheel") != -1)
+						object.rotationX += 10;
 				}
 			}
-			*/
+			
 			camera.hover();
 			view.render();
 		}
@@ -215,7 +215,7 @@ package {
 		private function onSuccess(event:Event):void
 		{
 			model = loader.handle as ObjectContainer3D;
-			model.scale(0.1);
+			model.scale(100);
 			
 			model.rotationX = 90;
 			
@@ -240,9 +240,9 @@ package {
 		 */
 		private function onMouseDown(event:MouseEvent):void
         {
-            lastPanAngle = camera.targetpanangle;
-            lastTiltAngle = camera.targettiltangle;
-            lastMouseX = stage.mouseX;
+            lastPanAngle = camera.panAngle;
+			lastTiltAngle = camera.tiltAngle;
+			lastMouseX = stage.mouseX;
             lastMouseY = stage.mouseY;
         	move = true;
         	stage.addEventListener(Event.MOUSE_LEAVE, onStageMouseLeave);

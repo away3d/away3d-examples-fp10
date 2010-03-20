@@ -148,7 +148,7 @@ package
 		{
 			//material1 = new WireColorMaterial(0x8A0041, {wirecolor:0xFFFFFF});
 			material1 = new WireColorMaterial(0x8A0041);
-			material1.wirecolor = 0xFFFFFF;
+			material1.wireColor = 0xFFFFFF;
 			
 			material2 = new ColorMaterial(0xA02860);
 			

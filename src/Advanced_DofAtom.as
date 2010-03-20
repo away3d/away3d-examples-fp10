@@ -145,8 +145,9 @@ package
 			camera.distance = 2000;
 			camera.yfactor = 1;
 			
-			camera.targetpanangle = camera.panangle = 45;
-			camera.targettiltangle = camera.tiltangle = 20;
+			camera.panAngle = 45;
+			camera.tiltAngle = 20;
+			camera.hover(true);
 			
 			//view = new View3D({scene:scene, camera:camera});
 			view = new View3D();
@@ -265,8 +266,8 @@ package
 		private function onEnterFrame( e:Event ):void
 		{
 			if (move) {
-				camera.targetpanangle = 0.3*(stage.mouseX - lastMouseX) + lastPanAngle;
-				camera.targettiltangle = 0.3*(stage.mouseY - lastMouseY) + lastTiltAngle;
+				camera.panAngle = 0.3*(stage.mouseX - lastMouseX) + lastPanAngle;
+				camera.tiltAngle = 0.3*(stage.mouseY - lastMouseY) + lastTiltAngle;
 			}
 			
 			for each (electronContainer in electrons)
@@ -285,8 +286,8 @@ package
 		 */
 		private function onMouseDown(event:MouseEvent):void
         {
-            lastPanAngle = camera.targetpanangle;
-            lastTiltAngle = camera.targettiltangle;
+            lastPanAngle = camera.panAngle;
+            lastTiltAngle = camera.tiltAngle;
             lastMouseX = stage.mouseX;
             lastMouseY = stage.mouseY;
         	move = true;

@@ -145,11 +145,12 @@ package
 			camera = new HoverCamera3D();
 			camera.distance = 1600;
 			camera.yfactor = 1;
-			camera.mintiltangle = -45;
+			camera.minTiltAngle = -45;
 			camera.steps = 4;
 			
-			camera.targetpanangle = 285;
-			camera.targettiltangle = 10;
+			camera.panAngle = 285;
+			camera.tiltAngle = 10;
+			camera.hover(true);
 			
 			//fogfilter = new FogFilter({material:new ColorMaterial(0x000000), minZ:800, maxZ:4000});
 			fogfilter = new FogFilter();
@@ -246,8 +247,8 @@ package
 		private function onEnterFrame( e:Event ):void
 		{
 			if (move) {
-				camera.targetpanangle = 0.3*(stage.mouseX - lastMouseX) + lastPanAngle;
-				camera.targettiltangle = 0.3*(stage.mouseY - lastMouseY) + lastTiltAngle;
+				camera.panAngle = 0.3 * (stage.mouseX - lastMouseX) + lastPanAngle;
+				camera.tiltAngle = 0.3 * (stage.mouseY - lastMouseY) + lastTiltAngle;
 			}
 			
 			camera.hover();
@@ -298,9 +299,9 @@ package
 		 */
 		private function onMouseDown(event:MouseEvent):void
         {
-            lastPanAngle = camera.targetpanangle;
-            lastTiltAngle = camera.targettiltangle;
-            lastMouseX = stage.mouseX;
+            lastPanAngle = camera.panAngle;
+			lastTiltAngle = camera.tiltAngle;
+			lastMouseX = stage.mouseX;
             lastMouseY = stage.mouseY;
         	move = true;
         }
