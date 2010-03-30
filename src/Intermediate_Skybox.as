@@ -40,11 +40,9 @@ package
 	import away3d.cameras.*;
 	import away3d.containers.*;
 	import away3d.core.clip.*;
-	import away3d.core.render.*;
-	import away3d.core.utils.Cast;
-	import away3d.loaders.*;
+	import away3d.core.utils.*;
 	import away3d.materials.*;
-	import away3d.primitives.Skybox6;
+	import away3d.primitives.*;
 	
 	import flash.display.*;
 	import flash.events.*;

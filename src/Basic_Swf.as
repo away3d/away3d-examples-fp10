@@ -42,11 +42,7 @@ package
 {
 	import away3d.cameras.*;
 	import away3d.containers.*;
-	import away3d.core.base.*;
-	import away3d.events.*;
 	import away3d.loaders.Swf;
-	import away3d.materials.*;
-	import away3d.primitives.*;
 	
 	import com.as3dmod.*;
 	import com.as3dmod.modifiers.*;
@@ -73,15 +69,10 @@ package
 		private var scene:Scene3D;
 		private var camera:Camera3D;
 		private var view:View3D;
-		private var bitmap:Bitmap;
-		private var over:Boolean;
 		
 		//signature variables
 		private var Signature:Sprite;
 		private var SignatureBitmap:Bitmap;
-		
-		//material objects
-		private var material:ColorMaterial;
 		
 		//scene objects
 		private var swf:ObjectContainer3D;

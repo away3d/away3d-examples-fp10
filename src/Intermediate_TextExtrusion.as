@@ -241,14 +241,14 @@ package
 		/**
 		 * Creates an extrusion on a mesh object
 		 */
-		private function extrudeMesh(mesh:Mesh, subdivisionsXY:uint = 1, subdivisionsZ:uint = 1, bothsides:Boolean = false):void
+		private function extrudeMesh(mesh:Mesh, subdivisionsXY:uint = 1, subdivisionsZ:uint = 1, bothsides:Boolean = true):void
 		{
 			//push mesh to front
 			var renderSession:SpriteRenderSession = new SpriteRenderSession();
 			renderSession.screenZ = -999999;
 			mesh.ownSession = renderSession;
 			
-			var extrusion:TextExtrude = new TextExtrude(mesh, {subdivisionsXY:subdivisionsXY, subdivisionsZ:subdivisionsZ, bothsides:true});
+			var extrusion:TextExtrude = new TextExtrude(mesh, {subdivisionsXY:subdivisionsXY, subdivisionsZ:subdivisionsZ, bothsides:bothsides});
 			scene.addChild(extrusion);
 		}
 		

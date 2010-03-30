@@ -151,7 +151,7 @@ package
 		{
 			_hiQual = !_hiQual;
 			if (_hiQual)
-				stage.quality = StageQuality.HIGH
+				stage.quality = StageQuality.HIGH;
 			else
 				stage.quality = StageQuality.LOW;
 		}
@@ -280,7 +280,7 @@ package
 		{
 			
 			var mx : Number = 3*(2*mouseX-stage.stageWidth)/stage.stageWidth;
-			var my : Number = 3*(2*mouseY-stage.stageHeight)/stage.stageHeight;
+			//var my : Number = 3*(2*mouseY-stage.stageHeight)/stage.stageHeight;
 			var offsetY : Number = _lanternMesh.minY*_lanternMesh.scaleY;
 			_count += .1;
 			

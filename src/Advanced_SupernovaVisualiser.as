@@ -43,7 +43,6 @@ package
 	import away3d.core.math.*;
 	import away3d.core.render.*;
 	import away3d.core.utils.*;
-	import away3d.loaders.*;
 	import away3d.materials.*;
 	import away3d.primitives.*;
 	import away3d.sprites.Sprite2D;
@@ -78,7 +77,6 @@ package
 		//footnote text
 		private var TrackText:TextField;
 		
-		private var background:Bitmap;
 		private var backBitmap:BitmapData;
 		private var transBitmap:BitmapData;
 		private var backShape:Shape;
@@ -88,7 +86,6 @@ package
 		private var tubeMaterial:BitmapMaterial;
 		
 		//scene objects
-		private var spheres:Array;
 		private var cylinder:Cylinder;
 		private var container:ObjectContainer3D;
 		private var container2:ObjectContainer3D;
@@ -104,7 +101,6 @@ package
 		private var peak:Number;
 		private var audioURL:String = "assets/03_The_Number_Song.mp3";
 		private var addNum:Number = 0;
-		private var addSpeed:int = 10;
 		private var distance:Number = 0;
 		private var distancespeed:Number = 0;
 		private var spectrum:ByteArray = new ByteArray();
@@ -231,7 +227,7 @@ package
 			var i:int = spheresNum;
 			var red:int = 0xFF;
 			var green:int = 0;
-			var blue:int = 0
+			var blue:int = 0;
 			while (i--)
 			{
 				red = 0xFF*(1 + Math.cos(i*Math.PI/spheresNum));
@@ -248,7 +244,7 @@ package
 		private function initSound():void
 		{
 			sound.load(new URLRequest(audioURL));
-			channel = sound.play()
+			channel = sound.play();
 		}
 		
 		/**
@@ -321,7 +317,7 @@ package
         			a = i;
         			backGraphics.lineTo(a, 250 - lev*400*Math.pow(2,-a/256));
         		} else {
-        			a = i - 256
+        			a = i - 256;
         			backGraphics.lineTo(511 - a, 250 - lev*400*Math.pow(2,-a/256));
         		}
 			}

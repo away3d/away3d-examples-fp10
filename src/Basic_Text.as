@@ -40,6 +40,7 @@ THE SOFTWARE.
 
 package 
 {
+	import flash.utils.getTimer;
 	import away3d.cameras.*;
 	import away3d.containers.*;
 	import away3d.core.base.*;
@@ -68,8 +69,6 @@ package
 		private var scene:Scene3D;
 		private var camera:Camera3D;
 		private var view:View3D;
-		private var bitmap:Bitmap;
-		private var over:Boolean;
 		
 		//signature variables
 		private var Signature:Sprite;
@@ -152,13 +151,13 @@ package
 		{
 			//textfield = new TextField3D("Arial", {material:material, text:"This is some text.", size:150, leading:150, kerning:0, textWidth:5000, align:"C"});
 			textfield = new TextField3D("Arial");
-			textfield.text = "This is some text."
+			textfield.text = "This is some text.";
 			textfield.material = material;
-			textfield.size = 150
+			textfield.size = 150;
 			textfield.leading = 150;
 			textfield.kerning = 0;
 			textfield.textWidth = 5000;
-			textfield.align = "C"
+			textfield.align = "C";
 			
 			scene.addChild(textfield);
 		}
@@ -194,6 +193,10 @@ package
 		{
 			hoverCamera();
 			view.render();
+			
+			for each (var vertex : Vertex in textfield.vertices)
+    			vertex.z = 50*Math.sin(vertex.x/50 + getTimer()/200);
+			
 		}
 		
 		/**

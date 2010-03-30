@@ -55,7 +55,6 @@ package
 	import away3d.loaders.*;
 	import away3d.loaders.data.*;
 	import away3d.materials.*;
-	import away3d.primitives.*;
 	
 	import flash.display.*;
 	import flash.events.*;
@@ -118,8 +117,6 @@ package
 		private var tiltangle:Number = 0;
 		private var panangle:Number = -100;
 		private var target:Number3D = new Number3D();
-		private var targettiltangle:Number = 0;
-		private var targetpanangle:Number = 0;
 		
 		//collision varaibles
 		private var collisionBitmap:BitmapData;
@@ -272,7 +269,6 @@ package
 		{
 			var pivot:Number3D;
 			var mesh:Mesh;
-			var material:BitmapMaterial;
 			for each (var child:Object3D in model.children)
 			{
 				if (child.name == "wall_l" || child.name == "wall_b" || child.name == "wall_r") {
@@ -288,7 +284,7 @@ package
 					}
 					//child.debugbs = true;
 					child.ownCanvas = true;
-					child.renderer = Renderer.CORRECT_Z_ORDER as IPrimitiveConsumer
+					child.renderer = Renderer.CORRECT_Z_ORDER as IPrimitiveConsumer;
 					sortedObjects.push(child);
 				} else if (child.name == "Door01") {
 					child.pushfront = true;
@@ -477,7 +473,7 @@ package
 				collisionShape.graphics.endFill();
 				sampleBitmap.copyPixels(collisionBitmap, sampleRect, samplePoint);
 				sampleBitmap.draw(collisionShape, null, null, BlendMode.MULTIPLY);
-			} while (sampleBitmap.getColorBoundsRect(0xFFFFFF, 0x000000).width && i > 1)
+			} while (sampleBitmap.getColorBoundsRect(0xFFFFFF, 0x000000).width && i > 1);
 			
 			//resolve collision
 			if (i < collisionDistance) {

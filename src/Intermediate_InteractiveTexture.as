@@ -39,8 +39,6 @@ package
 {
 	import away3d.cameras.*;
 	import away3d.containers.*;
-	import away3d.core.utils.*;
-	import away3d.events.*;
 	import away3d.materials.*;
 	import away3d.primitives.*;
 	
@@ -82,7 +80,6 @@ package
 		
 		//navigation variables
 		private var rotateSpeed:Number = 1;
-		private var moveSpeed:Number = 8;
 		private var upFlag:Boolean = false;
 		private var downFlag:Boolean = false;
 		private var leftFlag:Boolean = false;

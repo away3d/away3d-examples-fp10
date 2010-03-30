@@ -40,7 +40,6 @@ package
 	import away3d.containers.*;
 	import away3d.core.utils.Cast;
 	import away3d.lights.*;
-	import away3d.loaders.*;
 	import away3d.materials.*;
 	import away3d.primitives.*;
 	

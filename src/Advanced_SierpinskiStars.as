@@ -1,10 +1,10 @@
 /*
 
-Billboard example in Away3d
+Sprite3D example in Away3d
 
 Demonstrates:
 
-How to use the Billboard element to create fast rendering arrays of particles.
+How to use the Sprite3D element to create fast rendering arrays of particles.
 How to create a Sierpinski triangle.
 
 Code by Rob Bateman
@@ -37,19 +37,14 @@ THE SOFTWARE.
 
 package 
 {
-	import away3d.animators.data.*;
 	import away3d.cameras.*;
 	import away3d.containers.*;
 	import away3d.core.base.*;
-	import away3d.core.draw.*;
 	import away3d.core.filter.*;
 	import away3d.core.math.*;
 	import away3d.core.render.*;
 	import away3d.core.utils.*;
-	import away3d.events.*;
-	import away3d.loaders.*;
 	import away3d.materials.*;
-	import away3d.primitives.*;
 	import away3d.sprites.*;
 	
 	import flash.display.*;
@@ -81,23 +76,19 @@ package
 		private var SignatureBitmap:Bitmap;
 		
 		//material objects
-		private var billboardMaterial:BitmapMaterial;
+		private var spriteMaterial:BitmapMaterial;
 		
 		//scene objects
-		private var billboardMesh:Mesh;
+		private var spriteMesh:Mesh;
 		
 		//generating objects
 		private var toRadians:Number = Math.PI/180;
-		private var billboard:Billboard;
-		private var billboardObject:BillboardObject;
+		private var sprite:Sprite3D;
+		private var spriteObject:Sprite3DObject;
 		private var speedx:Number;
 		private var speedy:Number;
 		private var speedz:Number;
-		private var billboardObjects:Array = new Array();
-		private var v1:Vertex;
-		private var v2:Vertex;
-		private var v3:Vertex;
-		private var v4:Vertex;
+		private var spriteObjects:Array = new Array();
 		
 		//navigation variables
 		private var move:Boolean = false;
@@ -109,7 +100,7 @@ package
 		
 		//spring variables
 		private var persp:Number;
-		private var billboardVector:Number3D = new Number3D();
+		private var spriteVector:Number3D = new Number3D();
 		private var mouseVector:Number3D = new Number3D();
 		private var mouseDiff:Number3D = new Number3D();
 		private var mouseDistance:Number;
@@ -187,7 +178,7 @@ package
 			var star:BitmapData = Cast.bitmap(Star);
 			var transstar:BitmapData = new BitmapData(star.width, star.height, true);
 			transstar.applyFilter(star, star.rect, new Point(0,0), new ColorMatrixFilter([0, 0, 0, 0, 245, 0, 0, 0, 0, 245, 0, 0, 0, 0, 255, 0.3, 0.3, 0.3, 0, 0]));
-			billboardMaterial = new BitmapMaterial( transstar );
+			spriteMaterial = new BitmapMaterial( transstar );
 		}
 		
 		/**
@@ -195,12 +186,12 @@ package
 		 */
 		private function initObjects():void
 		{
-			//billboardMesh = new Mesh({material:billboardMaterial});
-			billboardMesh = new Mesh();
-			billboardMesh.material = billboardMaterial;
+			//spriteMesh = new Mesh({material:spriteMaterial});
+			spriteMesh = new Mesh();
+			spriteMesh.material = spriteMaterial;
 			
-			billboardMesh.rotate(new Number3D(1, 0, -1), 90 -Math.atan(1/Math.sqrt(2))/toRadians);
-			scene.addChild(billboardMesh);
+			spriteMesh.rotate(new Number3D(1, 0, -1), 90 -Math.atan(1/Math.sqrt(2))/toRadians);
+			scene.addChild(spriteMesh);
 			
 			generateSierpinski(5, 500, 0, 0, 0);
 		}
@@ -225,10 +216,10 @@ package
 		private function generateSierpinski(itr:int, size:Number, x:Number, y:Number, z:Number):void
 		{
 			if (size != 500) {
-				billboard = new Billboard(new Vertex(x, y, z), null, 5, 5);
-				billboard.scaling = 0.005*size;
-				billboardObjects.push(new BillboardObject(billboard, x, y, z, 0, 0, 0));
-				billboardMesh.addBillboard(billboard);
+				sprite = new Sprite3D(null, 5, 5);
+				sprite.scaling = 0.005*size;
+				spriteObjects.push(new Sprite3DObject(sprite, x, y, z, 0, 0, 0));
+				spriteMesh.addSprite(sprite);
 			}
 			if (itr) {
 				itr--;
@@ -259,16 +250,16 @@ package
 			mouseVector.y = view.mouseY/persp;
 			mouseVector.z = 1600;
 			
-			mouseMatrix.clone(view.cameraVarsStore.viewTransformDictionary[billboardMesh]);
+			mouseMatrix.clone(view.cameraVarsStore.viewTransformDictionary[spriteMesh]);
 			mouseMatrix.inverse(mouseMatrix);
 			mouseVector.transform(mouseVector, mouseMatrix);
 			
-			for each(billboardObject in billboardObjects) {
-				billboardVector.x = billboardObject.x;
-				billboardVector.y = billboardObject.y;
-				billboardVector.z = billboardObject.z;
+			for each(spriteObject in spriteObjects) {
+				spriteVector.x = spriteObject.x;
+				spriteVector.y = spriteObject.y;
+				spriteVector.z = spriteObject.z;
 				if (active) {
-					mouseDiff.sub(billboardVector, mouseVector);
+					mouseDiff.sub(spriteVector, mouseVector);
 					mouseDistance = 5*(10000 + mouseDiff.modulo)/(1000 + mouseDiff.modulo2);
 					mouseDiff.scale(mouseDiff, mouseDistance);
 				} else {
@@ -276,20 +267,20 @@ package
 					mouseDiff.y = 0;
 					mouseDiff.z = 0;
 				}
-				billboardObject.speedx *= 0.6;
-				billboardObject.speedy *= 0.6;
-				billboardObject.speedz *= 0.6;
-				speedx = (billboardObject.speedx += (billboardVector.x + mouseDiff.x - billboardObject.billboard.x)/4);
-				speedy = (billboardObject.speedy += (billboardVector.y + mouseDiff.y - billboardObject.billboard.y)/4);
-				speedz = (billboardObject.speedz += (billboardVector.z + mouseDiff.z - billboardObject.billboard.z)/4);
+				spriteObject.speedx *= 0.6;
+				spriteObject.speedy *= 0.6;
+				spriteObject.speedz *= 0.6;
+				speedx = (spriteObject.speedx += (spriteVector.x + mouseDiff.x - spriteObject.sprite.x)/4);
+				speedy = (spriteObject.speedy += (spriteVector.y + mouseDiff.y - spriteObject.sprite.y)/4);
+				speedz = (spriteObject.speedz += (spriteVector.z + mouseDiff.z - spriteObject.sprite.z)/4);
 				
 				speedx = speedx < 0 ? -speedx : speedx;
 				speedy = speedy < 0 ? -speedy : speedy;
 				speedz = speedz < 0 ? -speedz : speedz;
 				if (speedx > 0.1 || speedy > 0.1 || speedz > 0.1) {
-					billboardObject.billboard.x += (billboardObject.speedx += (billboardVector.x + mouseDiff.x - billboardObject.billboard.x)/4);
-					billboardObject.billboard.y += (billboardObject.speedy += (billboardVector.y + mouseDiff.y - billboardObject.billboard.y)/4);
-					billboardObject.billboard.z += (billboardObject.speedz += (billboardVector.z + mouseDiff.z - billboardObject.billboard.z)/4);
+					spriteObject.sprite.x += (spriteObject.speedx += (spriteVector.x + mouseDiff.x - spriteObject.sprite.x)/4);
+					spriteObject.sprite.y += (spriteObject.speedy += (spriteVector.y + mouseDiff.y - spriteObject.sprite.y)/4);
+					spriteObject.sprite.z += (spriteObject.speedz += (spriteVector.z + mouseDiff.z - spriteObject.sprite.z)/4);
 				}
 			}
 		}
@@ -343,14 +334,14 @@ package
 	}
 }
 
-import away3d.core.base.Billboard;
+import away3d.sprites.Sprite3D;
 
 /**
- * Data class for a billboard's position and speed
+ * Data class for a sprite's position and speed
  */
-class BillboardObject
+class Sprite3DObject
 {
-	public var billboard:Billboard;
+	public var sprite:Sprite3D;
 	
 	public var x:Number;
 	
@@ -364,9 +355,9 @@ class BillboardObject
 	
 	public var speedz:Number;
 	
-	public function BillboardObject(billboard:Billboard, x:Number, y:Number, z:Number, speedx:Number, speedy:Number, speedz:Number)
+	public function Sprite3DObject(sprite:Sprite3D, x:Number, y:Number, z:Number, speedx:Number, speedy:Number, speedz:Number)
 	{
-		this.billboard = billboard;
+		this.sprite = sprite;
 		this.x = x;
 		this.y = y;
 		this.z = z;

@@ -43,8 +43,6 @@ package
 {
 	import away3d.cameras.*;
 	import away3d.containers.*;
-	import away3d.core.clip.RectangleClipping;
-	import away3d.core.math.*;
 	import away3d.core.render.*;
 	import away3d.core.utils.Cast;
 	import away3d.core.utils.DofCache;
@@ -55,7 +53,6 @@ package
 	import flash.display.*;
 	import flash.events.*;
 	import flash.geom.ColorTransform;
-	import flash.geom.Matrix;
 	
 	[SWF(backgroundColor="#000000", frameRate="30", quality="LOW", width="800", height="600")]
 	

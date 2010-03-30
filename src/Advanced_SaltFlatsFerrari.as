@@ -44,7 +44,6 @@ package
 	import away3d.core.utils.*;
 	import away3d.events.*;
 	import away3d.loaders.*;
-	import away3d.loaders.data.*;
 	import away3d.materials.*;
 	import away3d.primitives.*;
 	
@@ -109,7 +108,6 @@ package
 		private var skyMaterial:BitmapMaterial;
 		private var materialArray:Array;
 		private var materialIndex:int = 0;
-		private var materialData:MaterialData;
 		
 		//scene objects
 		private var max3ds:Max3DS;
@@ -123,9 +121,6 @@ package
 		private var lastTiltAngle:Number;
 		private var lastMouseX:Number;
 		private var lastMouseY:Number;
-		
-		private var timer:Number = 0;
-		private var t:Number = 0;
 		
 		/**
 		 * Constructor

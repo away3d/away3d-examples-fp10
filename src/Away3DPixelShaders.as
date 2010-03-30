@@ -80,7 +80,7 @@ package
 		private function onEnterFrame(event : Event) : void
 		{
 			var mx : Number = 3*(2*mouseX-stage.stageWidth)/stage.stageWidth;
-			var my : Number = 3*(2*mouseY-stage.stageHeight)/stage.stageHeight;
+			//var my : Number = 3*(2*mouseY-stage.stageHeight)/stage.stageHeight;
 			_count += .05;
 
 			_light.x = Math.sin(_count)*200;

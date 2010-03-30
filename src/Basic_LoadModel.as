@@ -38,6 +38,7 @@ THE SOFTWARE.
 
 package
 {
+	import away3d.debug.AwayStats;
 	import away3d.cameras.*;
 	import away3d.containers.*;
 	import away3d.core.base.*;
@@ -48,7 +49,7 @@ package
 	import flash.display.*;
 	import flash.events.*;
 	
-	[SWF(backgroundColor="#000000", frameRate="30", quality="LOW", width="800", height="600")]
+	[SWF(backgroundColor="#000000", frameRate="60", quality="LOW", width="800", height="600")]
 	
 	public class Basic_LoadModel extends Sprite
 	{
@@ -144,6 +145,8 @@ package
             SignatureBitmap.bitmapData.draw(Signature);
             stage.quality = StageQuality.LOW;
             addChild(SignatureBitmap);
+            
+            addChild(new AwayStats(view));
 		}
 		
 		/**

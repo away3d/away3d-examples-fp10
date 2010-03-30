@@ -40,16 +40,16 @@ THE SOFTWARE.
 
 package
 {
+	import away3d.core.clip.RectangleClipping;
 	import away3d.cameras.*;
 	import away3d.containers.*;
 	import away3d.core.base.*;
-	import away3d.core.utils.Cast;
-	import away3d.events.*;
+	import away3d.core.utils.*;
 	import away3d.lights.*;
 	import away3d.loaders.*;
 	import away3d.materials.*;
 	import away3d.primitives.*;
-	import away3d.test.Button;
+	import away3d.test.*;
 	
 	import flash.display.*;
 	import flash.events.*;
@@ -188,8 +188,11 @@ package
 			//view = new View3D({scene:scene, camera:camera});
 			view = new View3D();
 			view.scene = scene;
-			view.camera = camera;
 			
+			view.clipping = new RectangleClipping({minX:-801, maxX:801, minY:0, maxY:600})
+			view.camera = camera;
+			view.x = 800;
+			view.y = 0;
 			view.addSourceURL("srcview/index.html");
 			addChild(view);
 			
@@ -416,8 +419,8 @@ package
 		 */
 		private function onResize(event:Event = null):void
 		{
-			view.x = stage.stageWidth / 2;
-            view.y = stage.stageHeight / 2;
+			//view.x = stage.stageWidth / 2;
+            //view.y = stage.stageHeight / 2;
             SignatureBitmap.y = stage.stageHeight - Signature.height;
             buttonGroup.x = stage.stageWidth - 600;
             buttonGroup.y = stage.stageHeight - 40;

@@ -260,11 +260,6 @@ package
             view.y = stage.stageHeight / 2;
             SignatureBitmap.y = stage.stageHeight - Signature.height;
 		}
-		
-        private function dist(dx:Number, dy:Number):Number
-	    {
-	        return Math.sqrt(dx*dx + dy*dy);
-	    }
 	}
 }
 

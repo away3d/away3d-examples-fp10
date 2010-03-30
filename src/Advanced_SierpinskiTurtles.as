@@ -49,18 +49,14 @@ package
 	import away3d.containers.*;
 	import away3d.core.base.*;
 	import away3d.core.math.*;
-	import away3d.core.render.*;
 	import away3d.core.utils.*;
 	import away3d.events.*;
-	import away3d.lights.DirectionalLight3D;
-	import away3d.loaders.*;
+	import away3d.lights.*;
 	import away3d.materials.*;
 	import away3d.primitives.*;
-	import away3d.sprites.*;
 	
 	import flash.display.*;
 	import flash.events.*;
-	import flash.filters.*;
 	
 	[SWF(backgroundColor="#000000", frameRate="30", quality="LOW", width="800", height="600")]
 	
@@ -108,7 +104,6 @@ package
 		
 		//navigation variables
 		private var move:Boolean = false;
-		private var sprite:DisplayObject;
 		private var mesh:Mesh;
 		private var lastPanAngle:Number;
 		private var lastTiltAngle:Number;
@@ -361,7 +356,7 @@ package
 		 */
 		private function onMeshMouseOut(event:MouseEvent3D):void
 		{
-			mesh = (event.object as Mesh)
+			mesh = (event.object as Mesh);
 			mesh.material = turtleMaterial;
 			mesh.gotoAndStop(0);
 		}
