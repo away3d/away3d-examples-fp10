@@ -38,7 +38,8 @@ package
 {
 	import away3d.cameras.*;
 	import away3d.containers.*;
-	import away3d.core.utils.Cast;
+	import away3d.core.math.*;
+	import away3d.core.utils.*;
 	import away3d.lights.*;
 	import away3d.materials.*;
 	import away3d.primitives.*;
@@ -166,14 +167,16 @@ package
 			planeMaterial = new BitmapMaterial(Cast.bitmap(YellowImage));
 			planeMaterial.precision = 2.5;
 			
-			//sphereMaterial = new PhongBitmapMaterial(Cast.bitmap(GreenImage), {shininess:20, specular:0.4});
+			//sphereMaterial = new PhongBitmapMaterial(Cast.bitmap(GreenImage), {shininess:20, specular:0x5A5A5A});
 			sphereMaterial = new PhongBitmapMaterial(Cast.bitmap(GreenImage));
 			sphereMaterial.shininess = 20;
-			sphereMaterial.specular = 0.4;
+			sphereMaterial.specular = 0x5A5A5A;
 			
 			cubeMaterial = new PhongBitmapMaterial(Cast.bitmap(BlueImage));
+			cubeMaterial.specular = 0xB3B3B3;
 			
 			torusMaterial = new PhongBitmapMaterial(Cast.bitmap(RedImage));
+			torusMaterial.specular = 0xB3B3B3;
 		}
 		
 		/**
@@ -183,20 +186,20 @@ package
 		{
 			//light1 = new DirectionalLight3D({y:1, ambient:0.1, diffuse:0.7});
 			light1 = new DirectionalLight3D();
-			light1.y = 1;
+			light1.direction = new Number3D(0, 1, 0);
 			light1.ambient = 0.1;
 			light1.diffuse = 0.7;
 			
-			scene.addChild(light1);
+			scene.addLight(light1);
 			
 			//light2 = new DirectionalLight3D({y:1, color:0x00FFFF, ambient:0.1, diffuse:0.7});
 			light2 = new DirectionalLight3D();
-			light2.y = 1;
+			light2.direction = new Number3D(0, 1, 0);
 			light2.color = 0x00FFFF;
 			light2.ambient = 0.1;
 			light2.diffuse = 0.7;
 			
-			scene.addChild(light2);
+			scene.addLight(light2);
 		}
 		
 		/**
@@ -331,8 +334,7 @@ package
 	    {
 	        cube.rotationY += 2;
 	        
-	    	light1.x = Math.cos(time/2000);
-	    	light1.z = Math.sin(time/2000);
+	    	light1.direction = new Number3D(Math.cos(time/2000), 0, Math.sin(time/2000));
 	    }
 	}
 }

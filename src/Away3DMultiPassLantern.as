@@ -232,15 +232,14 @@ package
 			// some blue global lighting to generate nightly feel 
 			_ambient = new AmbientLight3D({color: 0x100720});
 			// moonlight pointing to lantern
-			_directional = new DirectionalLight3D({y: 3000, z: -5000, color: 0xd8e8ff});
-			_directional.lookAt(new Number3D(0, 0, 0));
-			_directional.x += 1500;
+			_directional = new DirectionalLight3D({color: 0xd8e8ff});
+			_directional.direction = new Number3D(0, -3000, 5000);
 			
 			// add green light first, since it will be used for the single pass diffuse material
-			_view.scene.addChild(_light);
-			_view.scene.addChild(_light2);
-			_view.scene.addChild(_ambient);
-			_view.scene.addChild(_directional);
+			_view.scene.addLight(_light);
+			_view.scene.addLight(_light2);
+			_view.scene.addLight(_ambient);
+			_view.scene.addLight(_directional);
 			
 			//_light.brightness = 1;
 			_light.radius = 300;

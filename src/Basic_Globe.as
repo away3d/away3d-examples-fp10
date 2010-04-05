@@ -40,6 +40,7 @@ package
 {
 	import away3d.cameras.*;
 	import away3d.containers.*;
+	import away3d.core.math.*;
 	import away3d.core.utils.*;
 	import away3d.lights.*;
 	import away3d.materials.*;
@@ -139,9 +140,9 @@ package
 		 */
 		private function initMaterials():void
 		{
-			//material = new PhongBitmapMaterial(Cast.bitmap(EarthImage), {specular:0.1, shininess:10});
+			//material = new PhongBitmapMaterial(Cast.bitmap(EarthImage), {specular:0x1A1A1A, shininess:10});
 			material = new PhongBitmapMaterial(Cast.bitmap(EarthImage));
-			material.specular = 0.1;
+			material.specular = 0x1A1A1A;
 			material.shininess = 10;
 		}
 		
@@ -168,12 +169,10 @@ package
 		{
 			//light = new DirectionalLight3D({x:1, y:1, z:-1, ambient:0.2});
 			light = new DirectionalLight3D();
-			light.x = 1;
-			light.y = 1;
-			light.z = -1;
+			light.direction = new Number3D(1, 1, -1);
 			light.ambient = 0.2;
 			
-			scene.addChild(light);
+			scene.addLight(light);
 		}
 		
 		/**

@@ -40,6 +40,7 @@ THE SOFTWARE.
 
 package
 {
+	import away3d.core.math.Number3D;
 	import away3d.core.clip.RectangleClipping;
 	import away3d.cameras.*;
 	import away3d.containers.*;
@@ -117,7 +118,7 @@ package
 		private var pedestalMaterial:WhiteShadingBitmapMaterial;
 		
 		//torso materials
-		private var torsoNormalMaterial:Dot3BitmapMaterialF10;
+		private var torsoNormalMaterial:Dot3BitmapMaterial;
 		private var torsoEnviroMaterial:EnviroBitmapMaterial;
 		private var torsoPhongMaterial:PhongBitmapMaterial;
 		private var torsoFlatMaterial:WhiteShadingBitmapMaterial;
@@ -188,11 +189,8 @@ package
 			//view = new View3D({scene:scene, camera:camera});
 			view = new View3D();
 			view.scene = scene;
-			
-			view.clipping = new RectangleClipping({minX:-801, maxX:801, minY:0, maxY:600})
 			view.camera = camera;
-			view.x = 800;
-			view.y = 0;
+			
 			view.addSourceURL("srcview/index.html");
 			addChild(view);
 			
@@ -219,15 +217,16 @@ package
 			
 			pedestalMaterial = new WhiteShadingBitmapMaterial(Cast.bitmap(PedestalImage));
 			
-			torsoNormalMaterial = new Dot3BitmapMaterialF10(Cast.bitmap(TorsoImage), Cast.bitmap(TorsoNormal));
+			torsoNormalMaterial = new Dot3BitmapMaterial(Cast.bitmap(TorsoImage), Cast.bitmap(TorsoNormal));
+			torsoNormalMaterial.specular = 0x808080;
 			
 			//torsoEnviroMaterial = new EnviroBitmapMaterial(Cast.bitmap(TorsoImage), Cast.bitmap(PanoramaImageR), {reflectiveness:0.2});
 			torsoEnviroMaterial = new EnviroBitmapMaterial(Cast.bitmap(TorsoImage), Cast.bitmap(PanoramaImageR));
 			torsoEnviroMaterial.reflectiveness = 0.2;
 			
-			//torsoPhongMaterial = new PhongBitmapMaterial(Cast.bitmap(TorsoImage), {specular:0.5});
+			//torsoPhongMaterial = new PhongBitmapMaterial(Cast.bitmap(TorsoImage), {specular:0x808080});
 			torsoPhongMaterial = new PhongBitmapMaterial(Cast.bitmap(TorsoImage));
-			torsoPhongMaterial.specular = 0.5;
+			torsoPhongMaterial.specular = 0x808080;
 			
 			torsoFlatMaterial = new WhiteShadingBitmapMaterial(Cast.bitmap(TorsoImage));
 		}
@@ -244,11 +243,9 @@ package
 			light.ambient = 0.25;
 			light.diffuse = 0.75;
 			light.specular = 0.9;
-			light.x = 40000;
-            light.z = 40000;
-            light.y = 40000;
+			light.direction = new Number3D(40000, 40000, 40000);
             
-			scene.addChild(light);
+			scene.addLight(light);
 		}
 		
 		/**
@@ -419,8 +416,8 @@ package
 		 */
 		private function onResize(event:Event = null):void
 		{
-			//view.x = stage.stageWidth / 2;
-            //view.y = stage.stageHeight / 2;
+			view.x = stage.stageWidth / 2;
+            view.y = stage.stageHeight / 2;
             SignatureBitmap.y = stage.stageHeight - Signature.height;
             buttonGroup.x = stage.stageWidth - 600;
             buttonGroup.y = stage.stageHeight - 40;

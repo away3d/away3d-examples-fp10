@@ -57,16 +57,16 @@ package
 			
 			_centerZ = (_mesh.maxZ + _mesh.minZ)*_mesh.scaleZ*.5;
 			
-			_light = new PointLight3D({color: 0xff3333, debug: false});
-			_light2 = new PointLight3D({color: 0x0000ff, debug: false});
+			_light = new PointLight3D({color: 0xff3333, debug: false, brightness: 1});
+			_light2 = new PointLight3D({color: 0x0000ff, debug: false, brightness: 1});
 			_ambient = new AmbientLight3D({color: 0x0c0c22});
-			dir = new DirectionalLight3D({y: 5000, z: 2000, color: 0xffffdd});
-			dir.lookAt(new Number3D(0, 0, _centerZ));
+			dir = new DirectionalLight3D({color: 0xffffdd});
+			dir.direction = new Number3D(0, -5000, -1155);
 			
-			_view.scene.addChild(_light);
-			_view.scene.addChild(_light2);
-			_view.scene.addChild(_ambient);
-			_view.scene.addChild(dir);
+			_view.scene.addLight(_light);
+			_view.scene.addLight(_light2);
+			_view.scene.addLight(_ambient);
+			_view.scene.addLight(dir);
 			
 			_light.radius = 300;
 			_light.fallOff = 1000;

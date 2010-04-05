@@ -44,6 +44,7 @@ package
 {
 	import AS3s.SeaTurtleAnimated;
 	
+	import away3d.arcane;
 	import away3d.animators.data.*;
 	import away3d.cameras.*;
 	import away3d.containers.*;
@@ -57,6 +58,8 @@ package
 	
 	import flash.display.*;
 	import flash.events.*;
+	
+	use namespace arcane;
 	
 	[SWF(backgroundColor="#000000", frameRate="30", quality="LOW", width="800", height="600")]
 	
@@ -107,8 +110,6 @@ package
 		private var mesh:Mesh;
 		private var lastPanAngle:Number;
 		private var lastTiltAngle:Number;
-		private var panAngle:Number;
-		private var tiltAngle:Number;
 		private var lastMouseX:Number;
 		private var lastMouseY:Number;
 		
@@ -148,7 +149,7 @@ package
 			
 			camera.panAngle = 285;
 			camera.tiltAngle = 10;
-			camera.hover(true);
+			//camera.hover(true);
 			
 			//view = new View3D({scene:scene, camera:camera});
 			view = new View3D();
@@ -206,14 +207,12 @@ package
 			
 			//light = new DirectionalLight3D({x:-60, y:100, z:60, ambient:0.5, diffuse:0.5, specular:1});
 			light = new DirectionalLight3D();
-			light.x = -60;
-			light.y = 100;
-			light.z = 60;
+			light.direction = new Number3D(-60, 100, 60);
 			light.ambient = 0.5;
 			light.diffuse = 0.5;
 			light.specular = 1;
 			
-			scene.addChild(light);
+			scene.addLight(light);
 			
 			//containers = new ObjectContainer3D({visible:false});
 			containers = new ObjectContainer3D();
@@ -325,7 +324,7 @@ package
 				containers.visible = false;
 				camera.panAngle = 0.3 * (stage.mouseX - lastMouseX) + lastPanAngle;
 				camera.tiltAngle = 0.3 * (stage.mouseY - lastMouseY) + lastTiltAngle;
-			} else if (camera.panAngle == panAngle && camera.tiltAngle == tiltAngle) {
+			} else if (camera._currentPanAngle == camera.panAngle && camera._currentTiltAngle == camera.tiltAngle) {
 				outlines.visible = false;
 				containers.visible = true;
 				
@@ -333,9 +332,6 @@ package
 				for each (turtle in turtles)
 					turtle.alpha = 1/(1 + (view.camera.screen(turtle).z - 1100)/1000);
 			}
-			
-			panAngle = camera.panAngle;
-			tiltAngle = camera.tiltAngle;
 			
 			camera.hover();
 			view.render();

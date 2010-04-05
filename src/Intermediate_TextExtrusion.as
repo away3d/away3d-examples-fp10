@@ -167,7 +167,7 @@ package
 			pointLight.ambient = 0.25;
 			pointLight.diffuse = 2;
 			pointLight.specular = 10;
-			scene.addChild(pointLight);
+			scene.addLight(pointLight);
 		}
 		
 		/**

@@ -50,6 +50,7 @@ package {
 	import away3d.cameras.lenses.*;
 	import away3d.containers.*;
 	import away3d.core.base.*;
+	import away3d.core.math.*;
 	import away3d.core.render.*;
 	import away3d.core.utils.*;
 	import away3d.lights.*;
@@ -218,14 +219,14 @@ package {
 		 */
 		private function initMaterials():void
 		{
-			//f10Material = new Dot3BitmapMaterialF10(Cast.bitmap(BodyTexture), Cast.bitmap(Normalmap), {specular:0.1, shininess:1000});
+			//f10Material = new Dot3BitmapMaterialF10(Cast.bitmap(BodyTexture), Cast.bitmap(Normalmap), {specular:0x1A1A1A, shininess:1000});
 			f10Material = new Dot3BitmapMaterialF10(Cast.bitmap(BodyTexture), Cast.bitmap(Normalmap));
-			f10Material.specular = 0.1;
+			f10Material.specular = 0x1A1A1A;
 			f10Material.shininess = 1000;
 			
-			//f9Material = new Dot3BitmapMaterial(Cast.bitmap(BodyTexture), Cast.bitmap(Normalmap), {specular:0.1, shininess:1000});
+			//f9Material = new Dot3BitmapMaterial(Cast.bitmap(BodyTexture), Cast.bitmap(Normalmap), {specular:0x1A1A1A, shininess:1000});
 			f9Material = new Dot3BitmapMaterial(Cast.bitmap(BodyTexture), Cast.bitmap(Normalmap));
-			f9Material.specular = 0.1;
+			f9Material.specular = 0x1A1A1A;
 			f9Material.shininess = 1000;
 			
 			flatMaterial = new WhiteShadingBitmapMaterial(Cast.bitmap(BodyTexture));
@@ -342,14 +343,13 @@ package {
 		{
 			//light = new DirectionalLight3D({y:700, z:1000, color:0xFFFFFF, ambient:0.2, diffuse:0.7, debug:true});
 			light = new DirectionalLight3D();
-			light.y = 700;
-			light.z = 1000;
+			light.direction = new Number3D(0, 700, 1000);
 			light.color = 0xFFFFFF;
 			light.ambient = 0.2;
 			light.diffuse = 0.7;
 			light.debug = true;
 			
-			scene.addChild( light );
+			scene.addLight(light);
 		}
 				
 		/**
@@ -498,8 +498,7 @@ package {
 		 */
         private function tick(time:int):void
 	    {
-	    	light.x = 1000*Math.cos(time/2000);
-	    	light.z = 1000*Math.sin(time/2000);
+	    	light.direction = new Number3D(1000*Math.cos(time/2000), 700, 1000*Math.sin(time/2000));
 	    	shadow.x = -20*Math.cos(time/2000);
 	    	shadow.z = -20*Math.sin(time/2000);
 	    }
