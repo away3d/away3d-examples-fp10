@@ -117,7 +117,7 @@ package
 		private var floor:Plane;
 		
 		//animation varibles
-		private var skinAnimation:SkinAnimation;
+		private var bonesAnimator:BonesAnimator;
 		
 		//navigation variables
 		private var rotate:Number;
@@ -293,7 +293,7 @@ package
 			scene.addChild(floor);
 			
 			//grabs an instance of the skin animation from the animationLibrary
-			skinAnimation = model1.animationLibrary.getAnimation("default").animation as SkinAnimation;
+			bonesAnimator = model1.animationLibrary.getAnimation("default").animator as BonesAnimator;
 		}
 		
 		/**
@@ -336,7 +336,7 @@ package
 			camera.moveBackward(700 - mouseY/2);
 			
 			//update the collada animation
-			skinAnimation.update(getTimer()*2/1000);
+			bonesAnimator.update(getTimer()*2/1000);
 			
 			//render scene
 			view.render();
