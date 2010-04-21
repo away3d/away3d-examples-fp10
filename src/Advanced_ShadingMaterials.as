@@ -40,11 +40,10 @@ THE SOFTWARE.
 
 package
 {
-	import away3d.core.math.Number3D;
-	import away3d.core.clip.RectangleClipping;
 	import away3d.cameras.*;
 	import away3d.containers.*;
 	import away3d.core.base.*;
+	import away3d.core.math.*;
 	import away3d.core.utils.*;
 	import away3d.lights.*;
 	import away3d.loaders.*;
@@ -127,8 +126,8 @@ package
 		private var light:DirectionalLight3D;
 		
 		//scene objects
-		private var Md2Torso:Md2still;
-		private var Md2Pedestal:Md2still;
+		private var Md2Torso:Md2;
+		private var Md2Pedestal:Md2;
 		private var torso:Mesh;
 		private var pedestal:Mesh;
 		private var panorama:Skybox;
@@ -243,7 +242,7 @@ package
 			light.ambient = 0.25;
 			light.diffuse = 0.75;
 			light.specular = 0.9;
-			light.direction = new Number3D(40000, 40000, 40000);
+			light.direction = new Number3D(-1, -1, -1);
             
 			scene.addLight(light);
 		}
@@ -254,7 +253,7 @@ package
 		private function initObjects():void
 		{
             //torso = Md2still.parse(TorsoMD2, {ownCanvas:true, material:torsoNormalMaterial});
-            Md2Torso = new Md2still();
+            Md2Torso = new Md2();
             torso = Md2Torso.parseGeometry(TorsoMD2) as Mesh;
             torso.ownCanvas = true;
             torso.material = torsoNormalMaterial;
@@ -267,7 +266,7 @@ package
             scene.addChild(torso);
 			
 			//pedestal = Md2still.parse(PedestalMD2, {ownCanvas:true, material:pedestalMaterial, rotationX:180, rotationZ:180});
-			Md2Pedestal = new Md2still();
+			Md2Pedestal = new Md2();
 			pedestal = Md2Pedestal.parseGeometry(PedestalMD2) as Mesh;
 			pedestal.ownCanvas = true;
 			pedestal.material = pedestalMaterial;

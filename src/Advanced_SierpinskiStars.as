@@ -217,6 +217,9 @@ package
 		{
 			if (size != 500) {
 				sprite = new Sprite3D(null, 5, 5);
+				sprite.x = x;
+				sprite.y = y;
+				sprite.z = z;
 				sprite.scaling = 0.005*size;
 				spriteObjects.push(new Sprite3DObject(sprite, x, y, z, 0, 0, 0));
 				spriteMesh.addSprite(sprite);

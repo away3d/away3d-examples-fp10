@@ -252,11 +252,9 @@ package
 					materialData.name == "orig__Snow_12" || 
 					materialData.name == "SaddleBr1" || 
 					materialData.name == "Mati_re81") {
-					(materialData.material as BitmapMaterial).precision = 3;
 					preciseMaterials.push(materialData.material);
 				} else if (materialData.name == "Charcoal") {
 					tvMaterial = new BitmapMaterial(materialData.textureBitmap);
-					tvMaterial.precision = 3;
 					preciseMaterials.push(tvMaterial);
 				}
 			}

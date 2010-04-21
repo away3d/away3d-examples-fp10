@@ -179,8 +179,7 @@ package
 			floorMaterial.repeat = true;
 			floorMaterial.scaleX = 3;
 			floorMaterial.scaleY = 3;
-			floorMaterial.precision = 2;
-			
+						
 			shadeMaterial = new BitmapMaterial(Cast.bitmap(Shade));
 			
 			positionMaterial = new BitmapMaterial(Cast.bitmap(Position));

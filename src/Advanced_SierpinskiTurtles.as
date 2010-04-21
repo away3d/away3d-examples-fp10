@@ -344,7 +344,7 @@ package
 		{
 			mesh = (event.object as Mesh);
 			mesh.material = hiliteMaterial;
-			mesh.play(new AnimationSequence("swim", true, true, 6));
+			mesh.animationLibrary.getAnimation("swim").animator.play();
 		}
 		
 		/**
@@ -354,7 +354,7 @@ package
 		{
 			mesh = (event.object as Mesh);
 			mesh.material = turtleMaterial;
-			mesh.gotoAndStop(0);
+			mesh.animationLibrary.getAnimation("swim").animator.gotoAndStop(0);
 		}
 		
 		/**

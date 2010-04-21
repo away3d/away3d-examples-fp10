@@ -182,7 +182,6 @@ package
 			poolTileMaterial.scaleX = 0.2;
 			poolTileMaterial.scaleY = 0.2;
 			poolTileMaterial.repeat = true;
-			poolTileMaterial.precision = 1;
 			
 			//create water movieclip with filter applied
 			poolCaustics = new Caustics() as MovieClip;
@@ -354,10 +353,6 @@ package
 				case "P".charCodeAt():
 					preciseFlag = !preciseFlag;
 					
-					if (preciseFlag)
-						poolTileMaterial.precision = 1;
-					else
-						poolTileMaterial.precision = 0;
 					break;
 				default:
 			}

@@ -1,17 +1,15 @@
 package
 {
-	import away3d.debug.AwayStats;
-	import away3d.containers.View3D;
-	import away3d.core.base.Mesh;
-	import away3d.core.math.Number3D;
-	import away3d.lights.AmbientLight3D;
-	import away3d.lights.DirectionalLight3D;
-	import away3d.lights.PointLight3D;
-	import away3d.loaders.Md2;
-	import away3d.materials.PhongMultiPassMaterial;
+	import away3d.debug.*;
+	import away3d.containers.*;
+	import away3d.core.base.*;
+	import away3d.core.math.*;
+	import away3d.lights.*;
+	import away3d.loaders.*;
+	import away3d.materials.*;
 	
-	import flash.display.Sprite;
-	import flash.events.Event;
+	import flash.display.*;
+	import flash.events.*;
 	
 	
 	[SWF(width="800", height="600", frameRate="60", backgroundColor="0x000000")]
@@ -61,7 +59,7 @@ package
 			_light2 = new PointLight3D({color: 0x0000ff, debug: false, brightness: 1});
 			_ambient = new AmbientLight3D({color: 0x0c0c22});
 			dir = new DirectionalLight3D({color: 0xffffdd});
-			dir.direction = new Number3D(0, -5000, -1155);
+			dir.direction = new Number3D(0, 5000, 1155);
 			
 			_view.scene.addLight(_light);
 			_view.scene.addLight(_light2);

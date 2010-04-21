@@ -343,7 +343,7 @@ package {
 		{
 			//light = new DirectionalLight3D({y:700, z:1000, color:0xFFFFFF, ambient:0.2, diffuse:0.7, debug:true});
 			light = new DirectionalLight3D();
-			light.direction = new Number3D(0, 700, 1000);
+			light.direction = new Number3D(0, -700, -1000);
 			light.color = 0xFFFFFF;
 			light.ambient = 0.2;
 			light.diffuse = 0.7;
@@ -498,7 +498,7 @@ package {
 		 */
         private function tick(time:int):void
 	    {
-	    	light.direction = new Number3D(1000*Math.cos(time/2000), 700, 1000*Math.sin(time/2000));
+	    	light.direction = new Number3D(-1000*Math.cos(time/2000), -700, -1000*Math.sin(time/2000));
 	    	shadow.x = -20*Math.cos(time/2000);
 	    	shadow.z = -20*Math.sin(time/2000);
 	    }

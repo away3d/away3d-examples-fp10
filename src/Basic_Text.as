@@ -155,8 +155,8 @@ package
 			textfield.material = material;
 			textfield.size = 150;
 			textfield.leading = 150;
-			textfield.kerning = 0;
-			textfield.textWidth = 5000;
+			textfield.letterSpacing = 0;
+			textfield.width = 5000;
 			textfield.align = "C";
 			
 			scene.addChild(textfield);

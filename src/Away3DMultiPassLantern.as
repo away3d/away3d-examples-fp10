@@ -233,7 +233,7 @@ package
 			_ambient = new AmbientLight3D({color: 0x100720});
 			// moonlight pointing to lantern
 			_directional = new DirectionalLight3D({color: 0xd8e8ff});
-			_directional.direction = new Number3D(0, -3000, 5000);
+			_directional.direction = new Number3D(0, 3000, -5000);
 			
 			// add green light first, since it will be used for the single pass diffuse material
 			_view.scene.addLight(_light);

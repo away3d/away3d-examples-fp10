@@ -169,7 +169,7 @@ package
 		{
 			//light = new DirectionalLight3D({x:1, y:1, z:-1, ambient:0.2});
 			light = new DirectionalLight3D();
-			light.direction = new Number3D(1, 1, -1);
+			light.direction = new Number3D(-1, -1, 1);
 			light.ambient = 0.2;
 			
 			scene.addLight(light);
