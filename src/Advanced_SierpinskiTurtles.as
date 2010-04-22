@@ -42,7 +42,7 @@ THE SOFTWARE.
 
 package 
 {
-	import AS3s.SeaTurtleAnimated;
+	//import AS3s.SeaTurtleAnimated;
 	
 	import away3d.arcane;
 	import away3d.animators.data.*;
@@ -200,7 +200,7 @@ package
 			
 			var angle:Number = 90 - Math.atan(1/Math.sqrt(2))/toRadians;
 			
-			seaturtle = new SeaTurtleAnimated();
+			//seaturtle = new SeaTurtleAnimated();
 			seaturtle.material = turtleMaterial;
 			seaturtle.rotate(new Number3D(1, 0, -1), -angle);
 			seaturtle.scale(0.24);

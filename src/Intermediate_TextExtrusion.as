@@ -38,8 +38,8 @@ package
 {
 	import away3d.cameras.*;
 	import away3d.containers.*;
-	import away3d.core.base.Mesh;
-	import away3d.core.math.Number3D;
+	import away3d.core.base.*;
+	import away3d.core.math.*;
 	import away3d.core.render.*;
 	import away3d.extrusions.*;
 	import away3d.lights.*;

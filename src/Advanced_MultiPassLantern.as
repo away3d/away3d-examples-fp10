@@ -64,7 +64,7 @@ package
 	import flash.events.MouseEvent;
 	
 	[SWF(width="800", height="600", frameRate="30", backgroundColor="0x000000")]
-	public class Away3DMultiPassLantern extends Sprite
+	public class Advanced_MultiPassLantern extends Sprite
 	{
 		/**
 		 * All the assets used in this demo
@@ -133,7 +133,7 @@ package
 		
 		private var _origin : Number3D = new Number3D();
 		
-		public function Away3DMultiPassLantern()
+		public function Advanced_MultiPassLantern()
 		{
 			stage.quality = StageQuality.LOW;
 			initView();

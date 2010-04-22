@@ -81,11 +81,17 @@ package
 		private var lastMouseX:Number;
 		private var lastMouseY:Number;
 		
+		/**
+		 * Constructor
+		 */		
 		public function Basic_InteractiveObjects()
 		{
 			init();
 		}
 		
+		/**
+		 * Global initialise function
+		 */		
 		private function init():void
 		{
 			initEngine();
@@ -93,6 +99,9 @@ package
 			initListeners();
 		}
 		
+		/**
+		 * Initialise the engine
+		 */				
 		private function initEngine():void
 		{
 			scene = new Scene3D();
@@ -134,6 +143,9 @@ package
             addChild(SignatureBitmap);
 		}
 		
+		/**
+		 * Initialise the scene objects
+		 */
 		private function initObjects():void
 		{
 			//plane = new Plane({y:-20, width:1000, height:1000, pushback:true, segmentsW:20, segmentsH:20});

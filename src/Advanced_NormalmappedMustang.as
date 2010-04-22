@@ -1,6 +1,6 @@
 ﻿/*
 
-Flash 9 normal mapping example in Away3d
+Flash 10 normal mapping example in Away3d
 
 Demonstrates:
 

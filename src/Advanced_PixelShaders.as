@@ -13,7 +13,7 @@ package
 	
 	
 	[SWF(width="800", height="600", frameRate="60", backgroundColor="0x000000")]
-	public class Away3DPixelShaders extends Sprite
+	public class Advanced_PixelShaders extends Sprite
 	{
 		[Embed(source="assets/torso_marble256.jpg")]
 		private var _texture : Class;
@@ -35,7 +35,7 @@ package
 		
 		private var _ambient : AmbientLight3D;
 		
-		public function Away3DPixelShaders()
+		public function Advanced_PixelShaders()
 		{
 			var dir : DirectionalLight3D;
 			_mesh = Md2.parse(new Model());

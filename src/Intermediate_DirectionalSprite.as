@@ -142,7 +142,6 @@ package
 		 */
 		private function initMaterials():void
 		{
-			//planeMaterial = new BitmapMaterial(Cast.bitmap(YellowImage), {precision:2.5});
 			planeMaterial = new BitmapMaterial(Cast.bitmap(YellowImage));
 		}
 		

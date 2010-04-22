@@ -6,7 +6,6 @@ Demonstrates:
 
 How to use the projectionVector property on TransformBitmapMaterial to project a lightmap onto the surface of a 3d object.
 How to use AnimatedBitmapMaterial to cache a looped animation for a texture.
-How to use precision on BitmapMaterial to minimise affine distortion of a texture.
 
 Code by Rob Bateman
 rob@infiniteturtles.co.uk
@@ -110,7 +109,6 @@ package
 		
 		//misc variables
 		private var debugFlag:Boolean = false;
-		private var preciseFlag:Boolean = true;
 		private var text:TextField;
 		
 		/**
@@ -280,8 +278,7 @@ package
 			text.selectable = false;
 			text.mouseEnabled = false;
 			text.text = "Mouse click and drag - rotate\n" + 
-					"T - toggle debug triangles\n" + 
-					"P - toggle precise materials\n";
+					"T - toggle debug triangles\n";
 			
 			text.filters = [new DropShadowFilter(1, 45, 0x0, 1, 0, 0)];
 			
@@ -349,10 +346,6 @@ package
 				case "T".charCodeAt():
 					debugFlag = !debugFlag;
 					poolTileMaterial.debug = debugFlag;
-					break;
-				case "P".charCodeAt():
-					preciseFlag = !preciseFlag;
-					
 					break;
 				default:
 			}

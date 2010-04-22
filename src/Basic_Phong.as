@@ -163,7 +163,6 @@ package
 		 */
 		private function initMaterials():void
 		{
-			//planeMaterial = new BitmapMaterial(Cast.bitmap(YellowImage), {precision:2.5});
 			planeMaterial = new BitmapMaterial(Cast.bitmap(YellowImage));
 			
 			//sphereMaterial = new PhongBitmapMaterial(Cast.bitmap(GreenImage), {shininess:20, specular:0x5A5A5A});
