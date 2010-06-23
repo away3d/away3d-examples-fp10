@@ -12,18 +12,18 @@
 <intAttribute key="PLAYER_WIDTH" value="800"/>
 <stringAttribute key="POST_COMPILE_ANT" value="build/post_compile.xml"/>
 <stringAttribute key="PRE_COMPILE_ANT" value=""/>
-<stringAttribute key="PROJECT_NAME" value="Away3D_Examples"/>
+<stringAttribute key="PROJECT_NAME" value="Away3D_Examples_FP10"/>
 <stringAttribute key="PUBLISHER_ID" value=""/>
 <booleanAttribute key="START_SWF_ENABLED" value="true"/>
 <stringAttribute key="START_SWF_LOCATION" value="bin/Advanced_MultiMario.html"/>
 <stringAttribute key="START_SWF_WITH" value="Browser"/>
 <booleanAttribute key="USE_GLOBAL_FCSH_LOCATION" value="true"/>
 <listAttribute key="org.eclipse.debug.core.MAPPED_RESOURCE_PATHS">
-<listEntry value="/Away3D_Examples"/>
+<listEntry value="/Away3D_Examples_FP10"/>
 </listAttribute>
 <listAttribute key="org.eclipse.debug.core.MAPPED_RESOURCE_TYPES">
 <listEntry value="4"/>
 </listAttribute>
-<stringAttribute key="org.eclipse.debug.ui.ATTR_CAPTURE_IN_FILE" value="${workspace_loc:/Away3D_Examples/launch/output.txt}"/>
+<stringAttribute key="org.eclipse.debug.ui.ATTR_CAPTURE_IN_FILE" value="${workspace_loc:/Away3D_Examples_FP10/launch/output.txt}"/>
 <stringAttribute key="process_factory_id" value="com.powerflasher.fdt.ui.launch.fcsh.ProcessFactory"/>
 </launchConfiguration>
