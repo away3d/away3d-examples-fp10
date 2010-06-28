@@ -146,7 +146,7 @@ package
 		 */
 		private function initMaterials():void
 		{
-			//material1 = new WireColorMaterial(0x8A0041, {wirecolor:0xFFFFFF});
+			//material1 = new WireColorMaterial(0x8A0041, {wireColor:0xFFFFFF});
 			material1 = new WireColorMaterial(0x8A0041);
 			material1.wireColor = 0xFFFFFF;
 			
