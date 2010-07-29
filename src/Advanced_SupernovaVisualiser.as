@@ -41,11 +41,11 @@ package
 	import away3d.cameras.*;
 	import away3d.containers.*;
 	import away3d.core.math.*;
-	import away3d.core.render.*;
+	import away3d.core.session.*;
 	import away3d.core.utils.*;
 	import away3d.materials.*;
 	import away3d.primitives.*;
-	import away3d.sprites.Sprite2D;
+	import away3d.sprites.*;
 	
 	import flash.display.*;
 	import flash.events.*;
@@ -89,7 +89,7 @@ package
 		private var cylinder:Cylinder;
 		private var container:ObjectContainer3D;
 		private var container2:ObjectContainer3D;
-		private var sprite:Sprite2D;
+		private var sprite:Sprite3D;
 		
 		//sprite constants
 		private var spheresNum:int = 100;
@@ -151,7 +151,7 @@ package
 			view = new View3D();
 			view.scene = scene;
 			view.camera = camera;
-			view.session = new BitmapRenderSession(2);
+			view.session = new BitmapSession(2);
 			
 			view.addSourceURL("srcview/index.html");
 			addChild(view);
@@ -234,7 +234,7 @@ package
 				green = 0xFF*(1 + Math.sin(i*Math.PI/spheresNum));
 				blue = 0xFF*(1 - Math.sin(i*Math.PI/spheresNum));
 				sprite = getNucleicSprite(spheresDistance*Math.cos(i*Math.PI*4/spheresNum), spheresDistance*Math.sin(i*Math.PI*4/spheresNum), spheresDistance*Math.sin(i*Math.PI*20/spheresNum), 20, red, green, blue);
-				container.addChild(sprite);
+				container.addSprite(sprite);
 			}
 		}
 		
@@ -261,7 +261,7 @@ package
 		/**
 		 * Creates a 2d sprite with the given arguments
 		 */
-        private function getNucleicSprite(x:Number, y:Number, z:Number, radius:Number, red:int, green:int, blue:int):Sprite2D
+        private function getNucleicSprite(x:Number, y:Number, z:Number, radius:Number, red:int, green:int, blue:int):Sprite3D
         {
         	var nucleicBitmap:BitmapData = new BitmapData(radius*2, radius*2, true, 0x00000000);
 			var bitmapShape:Shape = new Shape();
@@ -273,12 +273,12 @@ package
 			nucleicBitmap.draw(bitmapShape);
 			
 			//var sprite2D:Sprite2D = new Sprite2D(nucleicBitmap, {scaling:2, x:x, y:y, z:z});
-			var sprite2D:Sprite2D = new Sprite2D(nucleicBitmap);
-			sprite2D.scaling = 2;
-			sprite2D.x = x;
-			sprite2D.y = y;
-			sprite2D.z = z;
-			return sprite2D;
+			var sprite3D:Sprite3D = new Sprite3D(new BitmapMaterial(nucleicBitmap));
+			sprite3D.scaling = 2;
+			sprite3D.x = x;
+			sprite3D.y = y;
+			sprite3D.z = z;
+			return sprite3D;
         }
         
 		/**
@@ -351,7 +351,7 @@ package
 			var j:int = spheresNum;
 			while (j--)
 			{
-				sprite = container.children[j];
+				sprite = container.sprites[j];
 				
 				sprite.x = distance*Math.cos((j + addNum)*Math.PI*10/spheresNum);
 				sprite.y = distance*Math.sin((j + addNum)*Math.PI*4/spheresNum);

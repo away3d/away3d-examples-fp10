@@ -36,6 +36,7 @@ THE SOFTWARE.
 
 package
 {
+	import away3d.extrusions.LatheExtrusion;
 	import away3d.cameras.*;
 	import away3d.containers.*;
 	import away3d.core.math.*;
@@ -253,7 +254,24 @@ package
 	        torus.segmentsR = 12;
 	        torus.segmentsT = 10;
 	        
-			scene.addChild(torus);
+			//scene.addChild(torus);
+			
+			var profile : Array = [ 
+				new Number3D(-50, 200, 0), 
+				new Number3D(-40, 150, 0), 
+				new Number3D(-60, 120, 0), 
+				new Number3D(-40, 0, 0)
+			];
+			
+			var vase : LatheExtrusion = new LatheExtrusion(profile);
+			vase.material = torusMaterial;
+			vase.x = -150;
+	        vase.y = 0;
+	        vase.z = -150;
+			vase.subdivision = 12;
+			vase.centerMesh = true;
+			vase.thickness = 10;
+			scene.addChild(vase);
 		}
 		
 		/**

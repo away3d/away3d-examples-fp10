@@ -174,12 +174,12 @@ package
 			// the flame
 			_flame = new MovieClipSprite(new FireAsset());
 			_flame.y = 100;
-			_flame.movieclip.scaleY = 0.4; 
-			_view.scene.addChild(_flame);
+			_flame.movieClip.scaleY = 0.4; 
+			_view.scene.addSprite(_flame);
 			
 			// firefly
 			_fireFly = new MovieClipSprite(new _fireFlyTexture());
-			_view.scene.addChild(_fireFly);
+			_view.scene.addSprite(_fireFly);
 			
 			// set camera
 			_view.camera.z = 1500;
@@ -287,7 +287,7 @@ package
 			_fireFly.x = _light.x = Math.sin(_count)*300;
 			_fireFly.y = _light.y = (1+Math.cos(_count*.5))*100+offsetY+30;
 			_fireFly.z = _light.z = Math.cos(_count*.698)*500;
-			_fireFly.movieclip.alpha = _light.brightness = .75+Math.cos(_count)*.25;
+			_fireFly.movieClip.alpha = _light.brightness = .75+Math.cos(_count)*.25;
 			
 			// flickering flame
 			_light2.brightness = .5+Math.random();

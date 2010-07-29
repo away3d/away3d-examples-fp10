@@ -42,7 +42,8 @@ THE SOFTWARE.
 
 */
 
-package {
+package
+{
 
 	import AS3s.*;
 	
@@ -51,7 +52,7 @@ package {
 	import away3d.containers.*;
 	import away3d.core.base.*;
 	import away3d.core.math.*;
-	import away3d.core.render.*;
+	import away3d.core.session.*;
 	import away3d.core.utils.*;
 	import away3d.lights.*;
 	import away3d.materials.*;
@@ -190,7 +191,7 @@ package {
 			view = new View3D();
 			view.scene = scene;
 			view.camera = camera;
-			view.session = new BitmapRenderSession(1);
+			view.session = new BitmapSession(1);
 			
 			view.addSourceURL("srcview/index.html");
 			addChild(view);
@@ -245,10 +246,10 @@ package {
 			//create mustang model
 			mustang = new MustangGT500({scaling:.06});
 			
-			var backLeftWheelSession:SpriteRenderSession = new SpriteRenderSession();
-			var backRightWheelSession:SpriteRenderSession = new SpriteRenderSession();
-			var frontLeftWheelSession:SpriteRenderSession = new SpriteRenderSession();
-			var frontRightWheelSession:SpriteRenderSession = new SpriteRenderSession();
+			var backLeftWheelSession:SpriteSession = new SpriteSession();
+			var backRightWheelSession:SpriteSession = new SpriteSession();
+			var frontLeftWheelSession:SpriteSession = new SpriteSession();
+			var frontRightWheelSession:SpriteSession = new SpriteSession();
 			
 			var frontLeftTire:Mesh = mustang.meshes[0];
 			frontLeftTire.material = tiresMaterial;

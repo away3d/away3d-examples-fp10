@@ -37,6 +37,7 @@ THE SOFTWARE.
 
 package
 {
+	import away3d.debug.AwayStats;
 	import away3d.cameras.*;
 	import away3d.containers.*;
 	import away3d.core.clip.*;
@@ -145,6 +146,8 @@ package
             SignatureBitmap.bitmapData.draw(Signature);
             stage.quality = StageQuality.LOW;
             addChild(SignatureBitmap);
+            
+            addChild(new AwayStats(view));
 		}
 		
 		/**

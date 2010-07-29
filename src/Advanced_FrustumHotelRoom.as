@@ -47,10 +47,10 @@ package
 	import away3d.containers.*;
 	import away3d.core.base.*;
 	import away3d.core.clip.*;
-	import away3d.core.draw.*;
 	import away3d.core.math.*;
 	import away3d.core.render.*;
 	import away3d.core.utils.*;
+	import away3d.debug.*;
 	import away3d.events.*;
 	import away3d.loaders.*;
 	import away3d.loaders.data.*;
@@ -196,6 +196,8 @@ package
             SignatureBitmap.bitmapData.draw(Signature);
             stage.quality = StageQuality.LOW;
             addChild(SignatureBitmap);
+            
+            addChild(new AwayStats(view));
 		}
 		
 		/**
@@ -282,7 +284,7 @@ package
 					}
 					//child.debugbs = true;
 					child.ownCanvas = true;
-					child.renderer = Renderer.CORRECT_Z_ORDER as IPrimitiveConsumer;
+					child.renderer = Renderer.CORRECT_Z_ORDER;
 					sortedObjects.push(child);
 				} else if (child.name == "Door01") {
 					child.pushfront = true;
@@ -583,9 +585,9 @@ package
 					sortObjects = !sortObjects;
 					for each (object in sortedObjects) {
 						if (sortObjects)
-							object.renderer = Renderer.CORRECT_Z_ORDER as IPrimitiveConsumer;
+							object.renderer = Renderer.CORRECT_Z_ORDER;
 						else
-							object.renderer = Renderer.BASIC as IPrimitiveConsumer;
+							object.renderer = Renderer.BASIC;
 					}
 					break;
 				case "F".charCodeAt():

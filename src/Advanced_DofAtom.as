@@ -41,9 +41,10 @@ THE SOFTWARE.
 
 package 
 {
+	import away3d.core.base.*;
 	import away3d.cameras.*;
 	import away3d.containers.*;
-	import away3d.core.render.*;
+	import away3d.core.session.*;
 	import away3d.core.utils.Cast;
 	import away3d.core.utils.DofCache;
 	import away3d.materials.*;
@@ -52,7 +53,7 @@ package
 	
 	import flash.display.*;
 	import flash.events.*;
-	import flash.geom.ColorTransform;
+	import flash.geom.*;
 	
 	[SWF(backgroundColor="#000000", frameRate="30", quality="LOW", width="800", height="600")]
 	
@@ -84,18 +85,19 @@ package
 		private var SignatureBitmap:Bitmap;
 		
 		//material objects
-		private var bitmapProton:BitmapData;
-		private var bitmapNeutron:BitmapData;
-		private var bitmapElectron:BitmapData;
+		private var protonMaterial:BitmapMaterial;
+		private var neutronMaterial:BitmapMaterial;
+		private var electronMaterial:BitmapMaterial;
 		private var skyboxMaterial:TransformBitmapMaterial;
 		private var skyboxBitmap:BitmapData;
 		private var skyboxColorTransform:ColorTransform = new ColorTransform(1, 1, 1, 0.5);
 		
 		//scene objects
-		private var proton:DofSprite2D;
-		private var neutron:DofSprite2D;
-		private var nucleicContainer:ObjectContainer3D;
-		private var electron:DofSprite2D;
+		private var proton:Mesh;
+		private var neutron:Mesh;
+		private var electron:Mesh;
+		private var protonContainer:ObjectContainer3D;
+		private var neutronContainer:ObjectContainer3D;
 		private var electronContainer:ObjectContainer3D;
 		private var skybox:Skybox;
 		
@@ -152,8 +154,8 @@ package
 			view.camera = camera;
 			
 			//adjusting the argument in the BitmapRenderSession adjusts the resolution of the rendered view.
-			view.session = new BitmapRenderSession(1);
-			//view.session = new BitmapRenderSession(2);
+			view.session = new BitmapSession(1);
+			//view.session = new BitmapSession(2);
 			
 			view.addSourceURL("srcview/index.html");
 			addChild(view);
@@ -173,9 +175,9 @@ package
 		private function initMaterials():void
 		{
 			//create bitmapData for DofSprites
-    		bitmapProton = Cast.bitmap(RedMarble);
-    		bitmapNeutron = Cast.bitmap(BlueMarble);
-    		bitmapElectron = Cast.bitmap(GreenMarble);
+    		protonMaterial = new BitmapMaterial(Cast.bitmap(RedMarble));
+    		neutronMaterial = new BitmapMaterial(Cast.bitmap(BlueMarble));
+    		electronMaterial = new BitmapMaterial(Cast.bitmap(GreenMarble));
     		
     		//create skybox material from view bitmap
 			skyboxBitmap = view.getBitmapData().clone();
@@ -202,37 +204,46 @@ package
 			var i:int = electronNum;
 			while (i--)
 			{
-				//proton = new DofSprite2D(bitmapProton, {scaling:1, x:180, ownCanvas:true, blendMode:BlendMode.DIFFERENCE});
-				proton = new DofSprite2D(bitmapProton);
+				proton = new Mesh();
+				proton.addSprite(new DepthOfFieldSprite(protonMaterial));
 				proton.x = 180;
 				proton.ownCanvas = true;
 				proton.blendMode = BlendMode.DIFFERENCE;
 				
-				//neutron = new DofSprite2D(bitmapNeutron, {scaling:1, x:-180, ownCanvas:true, blendMode:BlendMode.DIFFERENCE});
-				neutron = new DofSprite2D(bitmapNeutron);
+				protonContainer = new ObjectContainer3D();
+				protonContainer.addChild(proton);
+				protonContainer.rotationX = i*360/electronNum;
+				protonContainer.rotationY = i*200/6;
+				protonContainer.rotationZ = i*180/electronNum;
+				
+				scene.addChild( protonContainer );
+				
+				neutron = new Mesh();
+				neutron.addSprite(new DepthOfFieldSprite(neutronMaterial));
 				neutron.x = -180;
 				neutron.ownCanvas = true;
 				neutron.blendMode = BlendMode.DIFFERENCE;
 				
-				//nucleicContainer = new ObjectContainer3D({rotationX:i*360/electronNum, rotationY:i*200/6}, rotationZ:i*180/electronNum, proton, neutron);
-				nucleicContainer = new ObjectContainer3D(proton, neutron);
-				nucleicContainer.rotationX = i*360/electronNum;
-				nucleicContainer.rotationY = i*200/6;
-				nucleicContainer.rotationZ = i*180/electronNum;
+				neutronContainer = new ObjectContainer3D();
+				neutronContainer.addChild(neutron);
+				neutronContainer.rotationX = i*360/electronNum;
+				neutronContainer.rotationY = i*200/6;
+				neutronContainer.rotationZ = i*180/electronNum;
+				
+				scene.addChild( neutronContainer );
 				
 				//A 3d object can have a session applied locally
 				//nucleicContainer.ownSession = new BitmapRenderSession(2);
 				
-				scene.addChild( nucleicContainer );
 				
-				//electron = new DofSprite2D(bitmapElectron, {scaling:1, y:500, ownCanvas:true, blendMode:BlendMode.DIFFERENCE});
-				electron = new DofSprite2D(bitmapElectron);
+				electron = new Mesh();
+				electron.addSprite(new DepthOfFieldSprite(electronMaterial));
 				electron.y = 500;
 				electron.ownCanvas = true;
 				electron.blendMode = BlendMode.DIFFERENCE;
 				
-				//electronContainer = new ObjectContainer3D({rotationX:i*360/electronNum, rotationY:i*360/6, rotationZ:i*180/electronNum}, electron);
-				electronContainer = new ObjectContainer3D(electron);
+				electronContainer = new ObjectContainer3D();
+				electronContainer.addChild(electron);
 				electronContainer.rotationX = i*360/electronNum;
 				electronContainer.rotationY = i*360/6;
 				electronContainer.rotationZ = i*180/electronNum;

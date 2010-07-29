@@ -40,7 +40,7 @@ package
 	import away3d.containers.*;
 	import away3d.core.base.*;
 	import away3d.core.math.*;
-	import away3d.core.render.*;
+	import away3d.core.session.*;
 	import away3d.extrusions.*;
 	import away3d.lights.*;
 	import away3d.materials.*;
@@ -244,7 +244,7 @@ package
 		private function extrudeMesh(mesh:Mesh, subdivisionsXY:uint = 1, subdivisionsZ:uint = 1, bothsides:Boolean = true):void
 		{
 			//push mesh to front
-			var renderSession:SpriteRenderSession = new SpriteRenderSession();
+			var renderSession:SpriteSession = new SpriteSession();
 			renderSession.screenZ = -999999;
 			mesh.ownSession = renderSession;
 			
