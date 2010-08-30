@@ -42,6 +42,7 @@ THE SOFTWARE.
 
 package 
 {
+	import away3d.loaders.Md2;
 	//import AS3s.SeaTurtleAnimated;
 	
 	import away3d.arcane;
@@ -65,6 +66,9 @@ package
 	
 	public class Advanced_SierpinskiTurtles extends Sprite
 	{
+		[Embed(source="assets/seaturtle.md2", mimeType="application/octet-stream")]
+		private var SeaTurtleAnimated:Class;
+		
 		[Embed(source="assets/seaturtle.jpg")]
 		private var SeaTurtleTexture:Class;
 		
@@ -100,6 +104,7 @@ package
 		private var toRadians:Number = Math.PI/180;
 		private var turtles:Array = new Array();
 		private var turtle:Mesh;
+		private var angle:Number;
 		private var v1:Vertex;
 		private var v2:Vertex;
 		private var v3:Vertex;
@@ -198,16 +203,11 @@ package
 			skysphere.scale(-1);
 			scene.addChild(skysphere);
 			
-			var angle:Number = 90 - Math.atan(1/Math.sqrt(2))/toRadians;
+			angle = 90 - Math.atan(1/Math.sqrt(2))/toRadians;
 			
-			//seaturtle = new SeaTurtleAnimated();
-			seaturtle.material = turtleMaterial;
-			seaturtle.rotate(new Number3D(1, 0, -1), -angle);
-			seaturtle.scale(0.24);
-			
-			//light = new DirectionalLight3D({x:-60, y:100, z:60, ambient:0.5, diffuse:0.5, specular:1});
+			//light = new DirectionalLight3D({x:60, y:-100, z:-60, ambient:0.5, diffuse:0.5, specular:1});
 			light = new DirectionalLight3D();
-			light.direction = new Number3D(-60, 100, 60);
+			light.direction = new Number3D(60, -100, -60);
 			light.ambient = 0.5;
 			light.diffuse = 0.5;
 			light.specular = 1;
@@ -252,7 +252,11 @@ package
 				return;
 			}
 			
-			turtle = seaturtle.cloneAll() as Mesh;
+			var md2:Md2 = new Md2();
+			turtle = md2.parseGeometry(SeaTurtleAnimated) as Mesh;
+			turtle.material = turtleMaterial;
+			turtle.rotate(new Number3D(1, 0, -1), -angle);
+			turtle.scale(0.24);
 			turtle.ownCanvas = true;
 			turtle.x = x;
 			turtle.y = y;

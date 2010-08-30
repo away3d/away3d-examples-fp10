@@ -1,12 +1,14 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <launchConfiguration type="com.powerflasher.fdt.ui.MxmlcGroup">
 <stringAttribute key="APP_ARGUMENTS" value=""/>
-<stringAttribute key="ARGUMENTS" value="--target-player=10.0.0 -library-path {flexSDK}/frameworks/locale/en_US"/>
+<stringAttribute key="ARGUMENTS" value="--target-player=10.0.0 -library-path {flexSDK}/frameworks/locale/en_US -static-link-runtime-shared-libraries=true"/>
 <stringAttribute key="FLEX_SDK_NAME" value="Flex_3_SDK_0_for_FP_10"/>
+<booleanAttribute key="KILL_PREVIUOS_VIEWER" value="false"/>
 <stringAttribute key="MAIN_CLASS" value="src/Advanced_DofAtom.as"/>
 <stringAttribute key="OUTPUT" value="bin/Advanced_DofAtom.swf"/>
 <booleanAttribute key="PASS_CP" value="true"/>
 <booleanAttribute key="PASS_MAIN_CLASS" value="true"/>
+<booleanAttribute key="PASS_RSLS" value="true"/>
 <booleanAttribute key="PASS_SWCS" value="true"/>
 <intAttribute key="PLAYER_HEIGHT" value="400"/>
 <intAttribute key="PLAYER_WIDTH" value="550"/>
@@ -18,6 +20,7 @@
 <stringAttribute key="START_SWF_LOCATION" value="bin/Advanced_DofAtom.html"/>
 <stringAttribute key="START_SWF_WITH" value="Browser"/>
 <booleanAttribute key="USE_GLOBAL_FCSH_LOCATION" value="true"/>
+<booleanAttribute key="USE_PROJECT_COMPILER_ARGUMENTS" value="true"/>
 <stringAttribute key="bad_container_name" value="/Away3D_Examples_FP10/fdtlauncher"/>
 <listAttribute key="org.eclipse.debug.core.MAPPED_RESOURCE_PATHS">
 <listEntry value="/Away3D_Examples_FP10"/>
