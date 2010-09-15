@@ -36,11 +36,11 @@ THE SOFTWARE.
 
 package
 {
-	import away3d.extrusions.LatheExtrusion;
 	import away3d.cameras.*;
 	import away3d.containers.*;
 	import away3d.core.math.*;
 	import away3d.core.utils.*;
+	import away3d.debug.*;
 	import away3d.lights.*;
 	import away3d.materials.*;
 	import away3d.primitives.*;
@@ -157,6 +157,8 @@ package
             SignatureBitmap.bitmapData.draw(Signature);
             stage.quality = StageQuality.LOW;
             addChild(SignatureBitmap);
+            
+            addChild(new AwayStats(view));
 		}
 		
 		/**
@@ -252,26 +254,8 @@ package
 	        torus.radius = 150;
 	        torus.tube = 60;
 	        torus.segmentsR = 12;
-	        torus.segmentsT = 10;
-	        
-			//scene.addChild(torus);
-			
-			var profile : Array = [ 
-				new Number3D(-50, 200, 0), 
-				new Number3D(-40, 150, 0), 
-				new Number3D(-60, 120, 0), 
-				new Number3D(-40, 0, 0)
-			];
-			
-			var vase : LatheExtrusion = new LatheExtrusion(profile);
-			vase.material = torusMaterial;
-			vase.x = -150;
-	        vase.y = 0;
-	        vase.z = -150;
-			vase.subdivision = 12;
-			vase.centerMesh = true;
-			vase.thickness = 10;
-			scene.addChild(vase);
+			torus.segmentsT = 10;
+			scene.addChild(torus);
 		}
 		
 		/**

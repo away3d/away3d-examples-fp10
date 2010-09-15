@@ -37,13 +37,11 @@ THE SOFTWARE.
 
 package
 {
-	import away3d.animators.Animator;
-	import away3d.loaders.utils.AnimationLibrary;
-	import away3d.animators.data.*;
 	import away3d.cameras.*;
 	import away3d.containers.*;
 	import away3d.core.base.*;
 	import away3d.core.utils.*;
+	import away3d.debug.*;
 	import away3d.loaders.*;
 	import away3d.materials.*;
 	import away3d.test.Button;
@@ -160,6 +158,8 @@ package
             SignatureBitmap.bitmapData.draw(Signature);
             stage.quality = StageQuality.LOW;
             addChild(SignatureBitmap);
+            
+            addChild(new AwayStats(view));
 		}
 		
 		/**

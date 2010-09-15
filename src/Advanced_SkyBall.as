@@ -147,6 +147,8 @@ package
 			SignatureBitmap.bitmapData.draw(Signature);
 			stage.quality = StageQuality.LOW;
 			addChild(SignatureBitmap);
+			
+            addChild(new AwayStats(view));
 		}
 		
 		/**
