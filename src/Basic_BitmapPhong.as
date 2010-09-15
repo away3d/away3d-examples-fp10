@@ -169,14 +169,14 @@ package
 			planeMaterial = new BitmapMaterial(Cast.bitmap(YellowImage));
 			
 			//sphereMaterial = new PhongBitmapMaterial(Cast.bitmap(GreenImage), {shininess:20, specular:0x5A5A5A});
-			sphereMaterial = new PhongBitmapMaterial(Cast.bitmap(GreenImage), {surfaceCache:false});
+			sphereMaterial = new PhongBitmapMaterial(Cast.bitmap(GreenImage), {surfaceCache:true});
 			sphereMaterial.shininess = 20;
 			sphereMaterial.specular = 0x5A5A5A;
 			
-			cubeMaterial = new PhongBitmapMaterial(Cast.bitmap(BlueImage), {surfaceCache:false});
+			cubeMaterial = new PhongBitmapMaterial(Cast.bitmap(BlueImage), {surfaceCache:true});
 			cubeMaterial.specular = 0xB3B3B3;
 			
-			torusMaterial = new PhongBitmapMaterial(Cast.bitmap(RedImage), {surfaceCache:false});
+			torusMaterial = new PhongBitmapMaterial(Cast.bitmap(RedImage), {surfaceCache:true});
 			torusMaterial.specular = 0xB3B3B3;
 		}
 		

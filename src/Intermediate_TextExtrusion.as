@@ -245,7 +245,7 @@ package
 		{
 			//push mesh to front
 			var renderSession:SpriteSession = new SpriteSession();
-			renderSession.screenZ = -999999;
+			renderSession.screenZ = 10;
 			mesh.ownSession = renderSession;
 			
 			var extrusion:TextExtrusion = new TextExtrusion(mesh, {subdivisionsXY:subdivisionsXY, subdivisionsZ:subdivisionsZ, bothsides:bothsides});

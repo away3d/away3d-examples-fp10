@@ -54,6 +54,7 @@ package
 	import away3d.core.math.*;
 	import away3d.core.session.*;
 	import away3d.core.utils.*;
+	import away3d.debug.*;
 	import away3d.lights.*;
 	import away3d.materials.*;
 	import away3d.test.*;
@@ -213,6 +214,8 @@ package
 			bloomBitmap.filters = [bloomFilter, new BlurFilter(20, 20, 3)];
 			bloomBitmap.blendMode = BlendMode.ADD;
 			addChild(bloomBitmap);
+			
+            addChild(new AwayStats(view));
 		}
 
 		/**

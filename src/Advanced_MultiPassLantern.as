@@ -40,28 +40,20 @@ THE SOFTWARE.
 package
 {
 	import away3d.debug.AwayStats;
-	import AS3s.Lantern;
+	import AS3s.*;
 	
-	import away3d.containers.View3D;
-	import away3d.core.base.Mesh;
-	import away3d.core.math.Number3D;
-	import away3d.lights.AmbientLight3D;
-	import away3d.lights.DirectionalLight3D;
-	import away3d.lights.PointLight3D;
-	import away3d.materials.BitmapMaterial;
-	import away3d.materials.PhongMultiPassMaterial;
-	import away3d.materials.PhongPBMaterial;
-	import away3d.materials.utils.TangentToObjectMapper;
-	import away3d.primitives.Skybox;
-	import away3d.primitives.utils.CubeFaces;
-	import away3d.sprites.MovieClipSprite;
+	import away3d.containers.*;
+	import away3d.core.base.*;
+	import away3d.core.math.*;
+	import away3d.lights.*;
+	import away3d.materials.*;
+	import away3d.materials.utils.*;
+	import away3d.primitives.*;
+	import away3d.primitives.utils.*;
+	import away3d.sprites.*;
 	
-	import flash.display.Bitmap;
-	import flash.display.BitmapData;
-	import flash.display.Sprite;
-	import flash.display.StageQuality;
-	import flash.events.Event;
-	import flash.events.MouseEvent;
+	import flash.display.*;
+	import flash.events.*;
 	
 	[SWF(width="800", height="600", frameRate="30", backgroundColor="0x000000")]
 	public class Advanced_MultiPassLantern extends Sprite

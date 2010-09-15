@@ -45,6 +45,7 @@ package
 	import away3d.core.base.*;
 	import away3d.core.math.*;
 	import away3d.core.utils.*;
+	import away3d.debug.*;
 	import away3d.lights.*;
 	import away3d.loaders.*;
 	import away3d.materials.*;
@@ -200,6 +201,8 @@ package
             SignatureBitmap.bitmapData.draw(Signature);
             stage.quality = StageQuality.LOW;
             addChild(SignatureBitmap);
+            
+            addChild(new AwayStats(view));
 		}
 		
 		/**

@@ -44,13 +44,14 @@ package
 	import away3d.core.math.*;
 	import away3d.core.render.*;
 	import away3d.core.utils.*;
+	import away3d.debug.*;
 	import away3d.materials.*;
 	import away3d.sprites.*;
 	
 	import flash.display.*;
 	import flash.events.*;
 	import flash.filters.*;
-	import flash.geom.Point;
+	import flash.geom.*;
 	
 	[SWF(backgroundColor="#000000", frameRate="30", quality="LOW", width="800", height="600")]
 	
@@ -102,9 +103,9 @@ package
 		private var persp:Number;
 		private var spriteVector:Number3D = new Number3D();
 		private var mouseVector:Number3D = new Number3D();
-		private var mouseDiff:Number3D = new Number3D();
+		private var mouseDiff:Vector3D = new Vector3D();
 		private var mouseDistance:Number;
-		private var mouseMatrix:MatrixAway3D = new MatrixAway3D();
+		private var mouseMatrix:Matrix3D = new Matrix3D();
 		
 		/**
 		 * Constructor
@@ -167,6 +168,8 @@ package
             SignatureBitmap.bitmapData.draw(Signature);
             stage.quality = StageQuality.LOW;
             addChild(SignatureBitmap);
+            
+            addChild(new AwayStats(view));
 		}
 		
 		/**
@@ -253,8 +256,8 @@ package
 			mouseVector.y = view.mouseY/persp;
 			mouseVector.z = 1600;
 			
-			mouseMatrix.clone(view.cameraVarsStore.viewTransformDictionary[spriteMesh]);
-			mouseMatrix.inverse(mouseMatrix);
+			mouseMatrix = view.cameraVarsStore.viewTransformDictionary[spriteMesh].clone();
+			mouseMatrix.invert();
 			mouseVector.transform(mouseVector, mouseMatrix);
 			
 			for each(spriteObject in spriteObjects) {
@@ -262,9 +265,9 @@ package
 				spriteVector.y = spriteObject.y;
 				spriteVector.z = spriteObject.z;
 				if (active) {
-					mouseDiff.sub(spriteVector, mouseVector);
-					mouseDistance = 5*(10000 + mouseDiff.modulo)/(1000 + mouseDiff.modulo2);
-					mouseDiff.scale(mouseDiff, mouseDistance);
+					mouseDiff = spriteVector.subtract(mouseVector);
+					mouseDistance = 5*(10000 + mouseDiff.length)/(1000 + mouseDiff.lengthSquared);
+					mouseDiff.scaleBy(mouseDistance);
 				} else {
 					mouseDiff.x = 0;
 					mouseDiff.y = 0;

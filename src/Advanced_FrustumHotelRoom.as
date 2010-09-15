@@ -112,8 +112,8 @@ package
 		private var cameraRightSpeed:Number = 0;
 		private var cameraRightAcc:Number = 2;
 		private var cameraRightDrag:Number = 0.3;
-		private var forwardVector:Number3D = new Number3D();
-		private var rightVector:Number3D = new Number3D();
+		private var forwardVector:Vector3D = new Vector3D();
+		private var rightVector:Vector3D = new Vector3D();
 		private var tiltangle:Number = 0;
 		private var panangle:Number = -100;
 		private var target:Number3D = new Number3D();
@@ -403,15 +403,15 @@ package
 			if (leftFlag)
 				cameraRightSpeed -= cameraRightAcc;
 			
-			//calculate forward & back vector
-			forwardVector.rotate(Number3D.FORWARD, camera.transform);
+			// calculate forward & back vector
+			forwardVector = camera.transform.deltaTransformVector(Vector3D.Z_AXIS);
 			forwardVector.y = 0;
 			forwardVector.normalize();
 			camera.x += forwardVector.x*cameraForwardSpeed;
 			camera.z += forwardVector.z*cameraForwardSpeed;
 			
-			//calculate left & right vector
-			rightVector.rotate(Number3D.RIGHT, camera.transform);
+			// calculate left & right vector
+			rightVector = camera.transform.deltaTransformVector(Vector3D.X_AXIS);
 			rightVector.y = 0;
 			rightVector.normalize();
 			
