@@ -41,7 +41,6 @@ package
 	import away3d.containers.*;
 	import away3d.core.base.*;
 	import away3d.core.filter.*;
-	import away3d.core.math.*;
 	import away3d.core.render.*;
 	import away3d.core.utils.*;
 	import away3d.debug.*;
@@ -101,8 +100,8 @@ package
 		
 		//spring variables
 		private var persp:Number;
-		private var spriteVector:Number3D = new Number3D();
-		private var mouseVector:Number3D = new Number3D();
+		private var spriteVector:Vector3D = new Vector3D();
+		private var mouseVector:Vector3D = new Vector3D();
 		private var mouseDiff:Vector3D = new Vector3D();
 		private var mouseDistance:Number;
 		private var mouseMatrix:Matrix3D = new Matrix3D();
@@ -193,7 +192,7 @@ package
 			spriteMesh = new Mesh();
 			spriteMesh.material = spriteMaterial;
 			
-			spriteMesh.rotate(new Number3D(1, 0, -1), 90 -Math.atan(1/Math.sqrt(2))/toRadians);
+			spriteMesh.rotate(new Vector3D(1, 0, -1), 90 -Math.atan(1/Math.sqrt(2))/toRadians);
 			scene.addChild(spriteMesh);
 			
 			generateSierpinski(5, 500, 0, 0, 0);
@@ -256,9 +255,9 @@ package
 			mouseVector.y = view.mouseY/persp;
 			mouseVector.z = 1600;
 			
-			mouseMatrix = view.cameraVarsStore.viewTransformDictionary[spriteMesh].clone();
+			mouseMatrix = (view.cameraVarsStore.viewTransformDictionary[spriteMesh] as Matrix3D).clone();
 			mouseMatrix.invert();
-			mouseVector.transform(mouseVector, mouseMatrix);
+			mouseVector = mouseMatrix.transformVector(mouseVector);
 			
 			for each(spriteObject in spriteObjects) {
 				spriteVector.x = spriteObject.x;

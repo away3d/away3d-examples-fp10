@@ -44,7 +44,6 @@ package
 	
 	import away3d.containers.*;
 	import away3d.core.base.*;
-	import away3d.core.math.*;
 	import away3d.lights.*;
 	import away3d.materials.*;
 	import away3d.materials.utils.*;
@@ -54,6 +53,7 @@ package
 	
 	import flash.display.*;
 	import flash.events.*;
+	import flash.geom.*;
 	
 	[SWF(width="800", height="600", frameRate="30", backgroundColor="0x000000")]
 	public class Advanced_MultiPassLantern extends Sprite
@@ -123,7 +123,7 @@ package
 		
 		private var _sign : Bitmap;
 		
-		private var _origin : Number3D = new Number3D();
+		private var _origin : Vector3D = new Vector3D();
 		
 		public function Advanced_MultiPassLantern()
 		{
@@ -195,12 +195,12 @@ package
 		{
 			// assign face textures to array
 			var faces : Array = [];
-			faces[CubeFaces.LEFT] = new _left().bitmapData;
-			faces[CubeFaces.RIGHT] = new _right().bitmapData;
-			faces[CubeFaces.FRONT] = new _front().bitmapData;
-			faces[CubeFaces.BACK] = new _back().bitmapData;
-			faces[CubeFaces.TOP] = new _top().bitmapData;
-			faces[CubeFaces.BOTTOM] = new _bottom().bitmapData;
+			faces[CubeFaces.LEFT] = (new _left() as Bitmap).bitmapData;
+			faces[CubeFaces.RIGHT] = (new _right() as Bitmap).bitmapData;
+			faces[CubeFaces.FRONT] = (new _front() as Bitmap).bitmapData;
+			faces[CubeFaces.BACK] = (new _back() as Bitmap).bitmapData;
+			faces[CubeFaces.TOP] = (new _top() as Bitmap).bitmapData;
+			faces[CubeFaces.BOTTOM] = (new _bottom() as Bitmap).bitmapData;
 			
 			// create skybox
 			var skybox : Skybox = new Skybox( 	new BitmapMaterial(faces[CubeFaces.BACK]),
@@ -225,7 +225,7 @@ package
 			_ambient = new AmbientLight3D({color: 0x100720});
 			// moonlight pointing to lantern
 			_directional = new DirectionalLight3D({color: 0xd8e8ff});
-			_directional.direction = new Number3D(0, 3000, -5000);
+			_directional.direction = new Vector3D(0, 3000, -5000);
 			
 			// add green light first, since it will be used for the single pass diffuse material
 			_view.scene.addLight(_light);
@@ -245,8 +245,8 @@ package
 		private function initMaterials() : void
 		{
 			// multiple lights hitting the surface
-			_lanternMesh.material = new PhongMultiPassMaterial(	new _texture().bitmapData,
-															new _normalMap().bitmapData,
+			_lanternMesh.material = new PhongMultiPassMaterial(	(new _texture() as Bitmap).bitmapData,
+															(new _normalMap() as Bitmap).bitmapData,
 															_lanternMesh,
 															null,
 															{	gloss: 5, 
@@ -255,10 +255,10 @@ package
 															}
 														);
 			// only rendering green light for the floor
-			_floorMesh.material = new PhongPBMaterial(	new _grass().bitmapData,
-													TangentToObjectMapper.transform(new _grassNormal().bitmapData, _floorMesh, true),
+			_floorMesh.material = new PhongPBMaterial(	(new _grass() as Bitmap).bitmapData,
+													TangentToObjectMapper.transform((new _grassNormal() as Bitmap).bitmapData, _floorMesh, true),
 													_floorMesh,
-													new _grassSpecular().bitmapData,
+													(new _grassSpecular() as Bitmap).bitmapData,
 													{	gloss: 1,
 														specular: 1,
 														smooth: true

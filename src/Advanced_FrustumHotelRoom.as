@@ -47,7 +47,6 @@ package
 	import away3d.containers.*;
 	import away3d.core.base.*;
 	import away3d.core.clip.*;
-	import away3d.core.math.*;
 	import away3d.core.render.*;
 	import away3d.core.utils.*;
 	import away3d.debug.*;
@@ -116,7 +115,7 @@ package
 		private var rightVector:Vector3D = new Vector3D();
 		private var tiltangle:Number = 0;
 		private var panangle:Number = -100;
-		private var target:Number3D = new Number3D();
+		private var target:Vector3D = new Vector3D();
 		
 		//collision varaibles
 		private var collisionBitmap:BitmapData;
@@ -267,7 +266,7 @@ package
 		 */
 		private function initObjects():void
 		{
-			var pivot:Number3D;
+			var pivot:Vector3D;
 			var mesh:Mesh;
 			for each (var child:Object3D in model.children)
 			{
@@ -293,21 +292,21 @@ package
 				} else if (child.name == "matress") {
 					child.pushfront = true;
 					child.ownCanvas = true;
-					pivot = new Number3D(0, -20, 0);
-					pivot.transform(pivot, child.transform);
+					pivot = new Vector3D(0, -20, 0);
+					pivot = child.transform.transformVector(pivot);
 					child.pivotPoint = pivot;
 					child.moveTo(child.x, child.y - 20, child.z);
 				} else if (child.name == "Pillows") {
 					child.pushfront = true;
 					child.ownCanvas = true;
-					pivot = new Number3D(0, -90, 0);
-					pivot.transform(pivot, child.transform);
+					pivot = new Vector3D(0, -90, 0);
+					pivot = child.transform.transformVector(pivot);
 					child.pivotPoint = pivot;
 					child.moveTo(child.x, child.y - 90, child.z);
 				} else if (child.name == "Lampsma" || child.name == "books" || child.name == "plant" || child.name == "picture" || child.name == "alarm") {
 					if (child.name == "books" || child.name == "plant") {
-						pivot = new Number3D(0, 0, 20);
-						pivot.transform(pivot, child.transform);
+						pivot = new Vector3D(0, 0, 20);
+						pivot = child.transform.transformVector(pivot);
 						child.pivotPoint = pivot;
 						child.moveTo(child.x, child.y, child.z + 20);
 					}

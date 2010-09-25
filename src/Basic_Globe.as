@@ -40,7 +40,6 @@ package
 {
 	import away3d.cameras.*;
 	import away3d.containers.*;
-	import away3d.core.math.*;
 	import away3d.core.utils.*;
 	import away3d.lights.*;
 	import away3d.materials.*;
@@ -48,6 +47,7 @@ package
 	
 	import flash.display.*;
 	import flash.events.*;
+	import flash.geom.*;
 	
 	[SWF(backgroundColor="#000000", frameRate="30", quality="LOW", width="800", height="600")]
 	
@@ -169,7 +169,7 @@ package
 		{
 			//light = new DirectionalLight3D({x:1, y:1, z:-1, ambient:0.2});
 			light = new DirectionalLight3D();
-			light.direction = new Number3D(-1, -1, 1);
+			light.direction = new Vector3D(-1, -1, 1);
 			light.ambient = 0.2;
 			
 			scene.addLight(light);

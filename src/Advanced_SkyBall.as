@@ -40,7 +40,6 @@ package
 {	
 	import away3d.cameras.*;
 	import away3d.containers.*;
-	import away3d.core.math.*;
 	import away3d.core.utils.*;
 	import away3d.debug.*;
 	import away3d.materials.*;
@@ -48,6 +47,7 @@ package
 	
 	import flash.display.*;
 	import flash.events.*;
+	import flash.geom.*;
 	import flash.utils.*;
 	
 	[SWF(backgroundColor="#000000", frameRate="30", quality="LOW", width="800", height="600")]
@@ -82,7 +82,7 @@ package
 		//projection vairables
 		private var projectionNum:int = 6;
 		private var projectionVectorArray:Array = new Array();
-		private var projectionVector:Number3D;
+		private var projectionVector:Vector3D;
 		
 		//scene objects
 		private var skysphere:Sphere;
@@ -196,7 +196,7 @@ package
 				projectedMaterial.throughProjection = true;
 				sphereMaterial.addMaterial(projectedMaterial);
 				projectedMaterialArray.push(projectedMaterial);
-				projectionVectorArray.push(new Number3D());
+				projectionVectorArray.push(new Vector3D());
 			}
 			
 			i = projectionNum;

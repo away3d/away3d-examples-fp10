@@ -49,7 +49,6 @@ package
 	import away3d.cameras.*;
 	import away3d.containers.*;
 	import away3d.core.base.*;
-	import away3d.core.math.*;
 	import away3d.core.utils.*;
 	import away3d.debug.*;
 	import away3d.events.*;
@@ -59,6 +58,7 @@ package
 	
 	import flash.display.*;
 	import flash.events.*;
+	import flash.geom.*;
 	
 	use namespace arcane;
 	
@@ -95,7 +95,6 @@ package
 		
 		//scene objects
 		private var skysphere:Sphere;
-		private var seaturtle:Mesh;
 		private var containers:ObjectContainer3D;
 		private var outlines:ObjectContainer3D;
 		private var light:DirectionalLight3D;
@@ -209,7 +208,7 @@ package
 			
 			//light = new DirectionalLight3D({x:60, y:-100, z:-60, ambient:0.5, diffuse:0.5, specular:1});
 			light = new DirectionalLight3D();
-			light.direction = new Number3D(60, -100, -60);
+			light.direction = new Vector3D(60, -100, -60);
 			light.ambient = 0.5;
 			light.diffuse = 0.5;
 			light.specular = 1;
@@ -220,12 +219,12 @@ package
 			containers = new ObjectContainer3D();
 			containers.visible = false;
 			
-			containers.rotate(new Number3D(1, 0, -1), angle);
+			containers.rotate(new Vector3D(1, 0, -1), angle);
 			scene.addChild(containers);
 			
 			outlines = new ObjectContainer3D();
 			
-			outlines.rotate(new Number3D(1, 0, -1), angle);
+			outlines.rotate(new Vector3D(1, 0, -1), angle);
 			scene.addChild(outlines);
 		}
 		
@@ -257,7 +256,7 @@ package
 			var md2:Md2 = new Md2();
 			turtle = md2.parseGeometry(SeaTurtleAnimated) as Mesh;
 			turtle.material = turtleMaterial;
-			turtle.rotate(new Number3D(1, 0, -1), -angle);
+			turtle.rotate(new Vector3D(1, 0, -1), -angle);
 			turtle.scale(0.24);
 			turtle.ownCanvas = true;
 			turtle.x = x;

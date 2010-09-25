@@ -38,7 +38,6 @@ package
 {
 	import away3d.cameras.*;
 	import away3d.containers.*;
-	import away3d.core.math.*;
 	import away3d.core.utils.*;
 	import away3d.debug.*;
 	import away3d.lights.*;
@@ -47,6 +46,7 @@ package
 	
 	import flash.display.*;
 	import flash.events.*;
+	import flash.geom.*;
 	import flash.utils.*;
 	
 	[SWF(backgroundColor="#000000", frameRate="60", quality="LOW", width="800", height="600")]
@@ -187,7 +187,7 @@ package
 		{
 			//light1 = new DirectionalLight3D({y:1, ambient:0.1, diffuse:0.7});
 			light1 = new DirectionalLight3D();
-			light1.direction = new Number3D(0, -1, 0);
+			light1.direction = new Vector3D(0, -1, 0);
 			light1.ambient = 0.1;
 			light1.diffuse = 0.7;
 			
@@ -195,7 +195,7 @@ package
 			
 			//light2 = new DirectionalLight3D({y:1, color:0x00FFFF, ambient:0.1, diffuse:0.7});
 			light2 = new DirectionalLight3D();
-			light2.direction = new Number3D(0, -1, 0);
+			light2.direction = new Vector3D(0, -1, 0);
 			light2.color = 0x00FFFF;
 			light2.ambient = 0.1;
 			light2.diffuse = 0.7;
@@ -334,7 +334,7 @@ package
 	    {
 	        cube.rotationY += 2;
 	        
-	    	light1.direction = new Number3D(-Math.cos(time/2000), 0, -Math.sin(time/2000));
+	    	light1.direction = new Vector3D(-Math.cos(time/2000), 0, -Math.sin(time/2000));
 	    }
 	}
 }

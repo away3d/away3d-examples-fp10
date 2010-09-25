@@ -43,13 +43,13 @@ package
 {
 	import away3d.cameras.*;
 	import away3d.containers.*;
-	import away3d.core.math.*;
 	import away3d.core.utils.*;
 	import away3d.materials.*;
 	import away3d.primitives.*;
 	
 	import flash.display.*;
 	import flash.events.*;
+	import flash.geom.*;
 	import flash.filters.*;
 	import flash.text.*;
 	
@@ -94,7 +94,7 @@ package
 		private var poolContainer:MovieClip;
 		
 		//projection vector value
-		private var projectionVector:Number3D = new Number3D(0.5, -1, 0.5);
+		private var projectionVector:Vector3D = new Vector3D(0.5, -1, 0.5);
 		
 		//scene objects
 		private var pool:Cube;
@@ -216,9 +216,9 @@ package
 			poolMaterial.addMaterial(poolWaterMaterial);
 			
 			//create transformed lifering material 
-			//lifeRingMaterial = new TransformBitmapMaterial(Cast.bitmap(LifeRing), {projectionVector:new Number3D(0, 1, 0), scaleX:100, scaleY:100, offsetX:-12800, offsetY:-12800, throughProjection:true});
+			//lifeRingMaterial = new TransformBitmapMaterial(Cast.bitmap(LifeRing), {projectionVector:new Vector3D(0, 1, 0), scaleX:100, scaleY:100, offsetX:-12800, offsetY:-12800, throughProjection:true});
 			lifeRingMaterial = new TransformBitmapMaterial(Cast.bitmap(LifeRing));
-			lifeRingMaterial.projectionVector = new Number3D(0, 1, 0);
+			lifeRingMaterial.projectionVector = new Vector3D(0, 1, 0);
 			lifeRingMaterial.scaleX = 100;
 			lifeRingMaterial.scaleY = 100;
 			lifeRingMaterial.offsetX = -12800;

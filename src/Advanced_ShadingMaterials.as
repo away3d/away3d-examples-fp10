@@ -43,7 +43,6 @@ package
 	import away3d.cameras.*;
 	import away3d.containers.*;
 	import away3d.core.base.*;
-	import away3d.core.math.*;
 	import away3d.core.utils.*;
 	import away3d.debug.*;
 	import away3d.lights.*;
@@ -54,6 +53,7 @@ package
 	
 	import flash.display.*;
 	import flash.events.*;
+	import flash.geom.*;
 	
 	[SWF(backgroundColor="#000000", frameRate="60", quality="LOW", width="800", height="600")]
 	
@@ -245,7 +245,7 @@ package
 			light.ambient = 0.25;
 			light.diffuse = 0.75;
 			light.specular = 0.9;
-			light.direction = new Number3D(-1, -1, -1);
+			light.direction = new Vector3D(-1, -1, -1);
             
 			scene.addLight(light);
 		}

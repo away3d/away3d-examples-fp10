@@ -39,7 +39,6 @@ package
 	import away3d.cameras.*;
 	import away3d.containers.*;
 	import away3d.core.base.*;
-	import away3d.core.math.*;
 	import away3d.core.session.*;
 	import away3d.extrusions.*;
 	import away3d.lights.*;
@@ -48,6 +47,7 @@ package
 	
 	import flash.display.*;
 	import flash.events.*;
+	import flash.geom.*;
 	
 	import wumedia.vector.*;
 	
@@ -278,7 +278,7 @@ package
 			
 			camera.x -= dX*0.25;
 			camera.y -= dY*0.25;
-			camera.lookAt(new Number3D(0, 0, 0));
+			camera.lookAt(new Vector3D(0, 0, 0));
 		}
 		
 		/**

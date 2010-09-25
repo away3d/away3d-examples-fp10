@@ -14,6 +14,7 @@ package AS3s
 	import away3d.primitives.*;
 	import flash.display.Bitmap;
 	import flash.display.BitmapData;
+	import flash.geom.Vector3D;
 
 	public class Lantern extends ObjectContainer3D
 	{
@@ -39,11 +40,11 @@ package AS3s
 		{
 			var m0:Matrix3D = new Matrix3D(Vector.<Number>([1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 1.3032628500000003, 14.747790398000001, 0.000003310000000095181, 1]));
 
-			objs.obj0 = {name:"obj_0_0",  transform:m0, pivotPoint:new Number3D(0,0,0), container:1, bothsides:false, material:null, ownCanvas:false, pushfront:false, pushback:false};
+			objs.obj0 = {name:"obj_0_0",  transform:m0, pivotPoint:new Vector3D(0,0,0), container:1, bothsides:false, material:null, ownCanvas:false, pushfront:false, pushback:false};
 			objs.obj0.geo=geos[0];
 			var m1:Matrix3D = new Matrix3D();
 
-			objs.obj1 = {name:"obj_1_1",  transform:m1, pivotPoint:new Number3D(0,0,0), container:1, bothsides:false, material:null, ownCanvas:false, pushfront:false, pushback:false};
+			objs.obj1 = {name:"obj_1_1",  transform:m1, pivotPoint:new Vector3D(0,0,0), container:1, bothsides:false, material:null, ownCanvas:false, pushfront:false, pushback:false};
 			objs.obj1.geo=geos[1];
 
 			var ref:Object;

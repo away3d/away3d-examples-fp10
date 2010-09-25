@@ -3,13 +3,13 @@ package
 	import away3d.debug.*;
 	import away3d.containers.*;
 	import away3d.core.base.*;
-	import away3d.core.math.*;
 	import away3d.lights.*;
 	import away3d.loaders.*;
 	import away3d.materials.*;
 	
 	import flash.display.*;
 	import flash.events.*;
+	import flash.geom.*;
 	
 	
 	[SWF(width="800", height="600", frameRate="60", backgroundColor="0x000000")]
@@ -40,8 +40,8 @@ package
 			var dir : DirectionalLight3D;
 			_mesh = Md2.parse(new Model());
 			_mesh.scale(0.075);
-			_mesh.material = new PhongMultiPassMaterial(	new _texture().bitmapData,
-															new _normalMap().bitmapData,
+			_mesh.material = new PhongMultiPassMaterial(	(new _texture() as Bitmap).bitmapData,
+															(new _normalMap() as Bitmap).bitmapData,
 															_mesh, null,
 															{	gloss: 5, 
 																specular: 1, 
@@ -59,7 +59,7 @@ package
 			_light2 = new PointLight3D({color: 0x0000ff, debug: false, brightness: 1});
 			_ambient = new AmbientLight3D({color: 0x0c0c22});
 			dir = new DirectionalLight3D({color: 0xffffdd});
-			dir.direction = new Number3D(0, 5000, 1155);
+			dir.direction = new Vector3D(0, 5000, 1155);
 			
 			_view.scene.addLight(_light);
 			_view.scene.addLight(_light2);
@@ -92,7 +92,7 @@ package
 			_view.camera.x = Math.sin(mx)*1000;
 			_view.camera.z = -Math.cos(mx)*1000+_centerZ;
 			_view.camera.y = (stage.stageHeight*.5-mouseY)*5;
-			_view.camera.lookAt(new Number3D(0, 0, _centerZ));
+			_view.camera.lookAt(new Vector3D(0, 0, _centerZ));
 
 			_view.render();
 		}

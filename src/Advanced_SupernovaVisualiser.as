@@ -40,7 +40,6 @@ package
 {
 	import away3d.cameras.*;
 	import away3d.containers.*;
-	import away3d.core.math.*;
 	import away3d.core.session.*;
 	import away3d.core.utils.*;
 	import away3d.materials.*;
@@ -202,7 +201,7 @@ package
 			container.filters = [filter1, filter2, filter3];
 			
 			container2 = new ObjectContainer3D(container);
-			container2.lookAt(new Number3D(1, 1, 1));
+			container2.lookAt(new Vector3D(1, 1, 1));
 			scene.addChild(container2);
 			
 			//create cylinder
