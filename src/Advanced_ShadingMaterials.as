@@ -119,7 +119,7 @@ package
 		
 		//torso materials
 		private var torsoNormalMaterial:Dot3BitmapMaterial;
-		private var torsoEnviroMaterial:EnviroBitmapMaterial;
+		private var torsoEnviroMaterial:EnviroColorMaterial;
 		private var torsoPhongMaterial:PhongBitmapMaterial;
 		private var torsoFlatMaterial:WhiteShadingBitmapMaterial;
 		
@@ -223,7 +223,7 @@ package
 			torsoNormalMaterial.specular = 0x808080;
 			
 			//torsoEnviroMaterial = new EnviroBitmapMaterial(Cast.bitmap(TorsoImage), Cast.bitmap(PanoramaImageR), {reflectiveness:0.2});
-			torsoEnviroMaterial = new EnviroBitmapMaterial(Cast.bitmap(TorsoImage), Cast.bitmap(PanoramaImageR));
+			torsoEnviroMaterial = new EnviroColorMaterial(0xFF0000, Cast.bitmap(PanoramaImageR));
 			torsoEnviroMaterial.reflectiveness = 0.2;
 			
 			//torsoPhongMaterial = new PhongBitmapMaterial(Cast.bitmap(TorsoImage), {specular:0x808080});
