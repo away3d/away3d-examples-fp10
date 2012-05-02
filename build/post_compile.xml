@@ -67,7 +67,7 @@
     <target name="clean">
     	<echo>Cleaning...</echo>
     	
-        <delete>
+        <delete includeemptydirs="true">
     		<fileset dir="${DEPLOY_DIR}">
     			<exclude name="**/*.html"/>
     			<exclude name="**/*.swf"/>
@@ -96,7 +96,7 @@
 	<!-- copy assets from source folder to deploy folder -->
 	<target name="copyassetfiles">
 		<echo>Copying Assets...</echo>
-		<copy overwrite="true" todir="${DEPLOY_DIR}" preservelastmodified="true">
+		<copy overwrite="true" todir="${DEPLOY_DIR}" preservelastmodified="true" includeemptydirs="false">
 	        <fileset dir="${APP_ROOT}">
 	            <exclude name="**/*.as"/>
 	        	<exclude name="**/*.pbk"/>
